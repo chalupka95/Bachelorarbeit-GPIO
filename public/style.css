@@ -1,0 +1,70 @@
+body {
+   background-image: url("/images/background.jpg");
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center;
+   zoom:100%;
+}
+button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px;
+    cursor: pointer;
+    height:50px;
+    width:120px;
+}
+.button2 {background-color: #008CBA;} /* Blue */
+.button3 {background-color: #f44336;} /* Red */
+.button4 {background-color: #e7e7e7; color: black;} /* Gray */
+.button5 {background-color: #555555;} /* Black */
+
+.MCbutton {
+   text-align: center;
+   font-size: 16px;
+   cursor: pointer;
+   float: left;
+   margin: 2px;
+   padding: 3px;
+   width: 127px;
+   height: 280px;
+   border: 2px solid black;
+   border-radius: 6px;
+
+}
+p.status_text {
+   text-align: center;
+   font-weight: bold;
+}
+
+.BorderMargin {
+   margin: 10px;
+   padding: 5px;
+   width: screen.width;
+   max-width: screen.width;
+   border: 3px solid black;
+   display:inline-block;
+}
+
+.BorderMargin_LED {
+   float: left;
+   margin: 2px;
+   padding: 3px;
+   width: 127px;
+   height: 280px;
+   border: 2px solid black;
+   border-radius: 6px;
+}
+
+div.start_led {
+  float: left;
+  width: 70px;
+  height: 110px;
+  padding: 10px;
+  border: 1px solid black;
+}

@@ -1,0 +1,396 @@
+<meta name="viewport" content="width=500, initial-scale=1"> <!--This line of code is for mobile responsive -->
+
+<head>
+<title>GPIO Bachelorarbeit</title>
+<link rel="stylesheet" type="text/css" href="/style.css"/>
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"/>
+<script>
+var COLOR_dict = {
+        'not set':'/images/LED3.png',
+        '1':'/images/LED2.png',
+        '0':'/images/LED.png',
+	'unexported':'/images/LED4.png'};
+var MAKE_DIRECTION = [];
+
+function change(xy) {
+	if (xy.style.backgroundColor =='lightgrey') {
+		xy.style.backgroundColor ='transparent';
+		var position = MAKE_DIRECTION.findIndex(function(wanted) {return xy.id == wanted});
+		MAKE_DIRECTION.splice(position, 1);
+	} else {
+		xy.style.backgroundColor ='lightgrey';
+		if (!MAKE_DIRECTION.includes(xy.id)) MAKE_DIRECTION.push(xy.id)};}
+
+function make_change(direction) {
+	if (direction == 'IN') {
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "/led/export/", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send("###################################################################################################################");
+		console.log('in'); 
+};	
+	if (direction == 'OUT') {};};
+</script>
+</head>
+
+
+<body class="bg">
+<div style='display:flex'>
+<div class="BorderMargin">
+  <div style=text-align:center;>Mark the Led and then set the direction you want to use</div>
+	<div id="led1" class='start_led' onclick="change(this)">
+		<img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">1</p></div>
+	<div id="led2" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">2</p></div>
+        <div id="led3" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">3</p></div>
+        <div id="led4" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">4</p></div>
+        <div id="led5" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">5</p></div>
+        <div id="led6" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">6</p></div>
+        <div id="led7" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">7</p></div>
+        <div id="led8" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">8</p></div>
+        <div id="led9" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">9</p></div>
+        <div id="led10" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">10</p></div>
+        <div id="led11" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">11</p></div>
+        <div id="led12" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">12</p></div>
+        <div id="led13" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">13</p></div>
+	<br>
+        <div id="led14" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">14</p></div>
+        <div id="led15" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">15</p></div>
+        <div id="led16" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">16</p></div>
+        <div id="led17" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">17</p></div>
+        <div id="led18" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">18</p></div>
+        <div id="led19" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">19</p></div>
+        <div id="led20" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">20</p></div>
+        <div id="led21" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">21</p></div>
+        <div id="led22" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">22</p></div>
+        <div id="led23" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">23</p></div>
+        <div id="led24" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">24</p></div>
+        <div id="led25" class='start_led' onclick="change(this)">
+                <img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">25</p></div>
+        <div id="led26" class='start_led' onclick="change(this)">
+		<img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">26</p></div>
+</div>
+
+<div class="BorderMargin">
+        <button id="MC1" class='MCbutton' style='background-color: lightblue;' onclick="make_change('IN')">Direction In</button>
+        <button id="MC2" class='MCbutton' style='background-color: darkblue;'  onclick="make_change('OUT')">Direction Out</button>
+</div>
+
+</div><br>
+
+<div class="BorderMargin">
+  <div style=text-align:center;> Aktive exportierte LED with direction out </div>
+ 
+  <div class="BorderMargin_LED">
+    <image id='imageLED1' src = "/images/LED3.png" alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED1").src = COLOR_dict[<%- JSON.stringify(value1) %>]
+console.log(COLOR_dict[<%- JSON.stringify(value1) %>]);
+</script>
+      <form action="/led/out/1" method="post">
+       <button id='botton1' type="submit" class="button button4">LED 1 </button>
+      </form>
+    <p>Led Status:</p>
+    <p class="status_text"><%=value1 %></p>
+  </div>
+
+
+  <div class="BorderMargin_LED">
+    <image id='imageLED2' src = "/images/LED3.png" alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED2").src = COLOR_dict[<%- JSON.stringify(value2) %>]</script>
+      <form action="/led/out/2" method="post">
+       <button type="submit" class="button button4">LED 2 </button>
+      </form>
+    <p>Led Status:</p>
+    <p class="status_text"><%=value2 %></p>
+  </div>
+
+
+  <div class="BorderMargin_LED">
+    <image id='imageLED3' src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED3").src = COLOR_dict[<%- JSON.stringify(value3) %>]</script>
+      <form action="/led/out/3" method="post">
+       <button type="submit" class="button button4">LED 3 </button>
+      </form>
+    <p>Led Status:</p>
+    <p class="status_text"><%=value3 %></p>
+  </div>
+
+
+  <div class="BorderMargin_LED">
+    <image id='imageLED4' src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED4").src = COLOR_dict[<%- JSON.stringify(value4) %>]</script>
+      <form action="/led/out/4" method="post">
+       <button type="submit" class="button button4">LED 4 </button>
+      </form>
+    <p>Led Status:</p>
+    <p class="status_text"><%=value4 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id='imageLED5' src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED5").src = COLOR_dict[<%- JSON.stringify(value5) %>]</script>
+      <form action="/led/out/5" method="post">
+       <button type="submit" class="button button4">LED 5 </button>
+      </form>
+    <p>Led Status:</p>
+    <p class="status_text"><%=value5 %></p>
+  </div>
+
+
+  <div class="BorderMargin_LED">
+    <image id='imageLED6' src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED6").src = COLOR_dict[<%- JSON.stringify(value6) %>]</script>
+      <form action="/led/out/6" method="post">
+       <button type="submit" class="button button4">LED 6 </button>
+      </form>
+    <p>Led Status:</p>
+    <p class="status_text"><%=value6 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id='imageLED7' src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED7").src = COLOR_dict[<%- JSON.stringify(value7) %>]</script>
+      <form action="/led/out/7" method="post">
+       <button type="submit" class="button button4">LED 7 </button>
+      </form>
+    <p>Led Status:</p>
+    <p class="status_text"><%=value7 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id='imageLED8' src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED8").src = COLOR_dict[<%- JSON.stringify(value8) %>]</script>
+      <form action="/led/out/8" method="post">
+        <button type="submit" class="button button4">LED 8 </button>
+      </form>
+    <p>Led Status:</p>
+    <p class="status_text"><%=value8 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id='imageLED9' src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED9").src = COLOR_dict[<%- JSON.stringify(value9) %>]</script>
+      <form action="/led/out/9" method="post"/>
+        <button type="submit" class="button button4">LED 9 </button>
+      </form>
+    <p>Led Status:</p>
+    <p class="status_text"><%=value9 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id='imageLED10' src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED10").src = COLOR_dict[<%- JSON.stringify(value10) %>]</script>
+      <form action="/led/out/10" method="post"/>
+        <button type="submit" class="button button4">LED 10 </button>
+      </form>
+    <p>Led Status:</p>
+    <p class="status_text"><%=value10 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id='imageLED11' src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED11").src = COLOR_dict[<%- JSON.stringify(value11) %>]</script>
+      <form action="/led/out/11" method="post"/>
+        <button type="submit" class="button button4">LED 11 </button>
+      </form>
+    <p>Led Status:</p>
+    <p class="status_text"><%=value11 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id='imageLED12' src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED12").src = COLOR_dict[<%- JSON.stringify(value12) %>]</script>
+      <form action="/led/out/12" method="post"/>
+        <button type="submit" class="button button4">LED 12 </button>
+      </form>
+    <p>Led Status:</p>
+    <p class="status_text"><%=value12 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id='imageLED13' src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED13").src = COLOR_dict[<%- JSON.stringify(value13) %>]</script>
+      <form action="/led/out/13" method="post"/>
+        <button type="submit" class="button button4">LED 13 </button>
+      </form>
+    <p>Led Status:</p>
+    <p class="status_text"><%=value13 %></p>
+  </div>
+</div>
+
+
+
+<div class="BorderMargin">
+  <div style=text-align:center;> Aktive exportierte LED with direction in </div>
+
+  <div class="BorderMargin_LED">
+    <image id="imageLED14" src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED14").src = COLOR_dict[<%- JSON.stringify(value14) %>]</script>
+      <form action="/led/in/14" method="post"/>
+        <button type="submit" class="button button4">Check</button>
+      </form>
+    <p>Led 14 Status:</p>
+    <p class="status_text"><%=value14 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id="imageLED15" src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED15").src = COLOR_dict[<%- JSON.stringify(value15) %>]</script>
+      <form action="/led/in/15" method="post"/>
+        <button type="submit" class="button button4">Check</button>
+      </form>
+    <p>Led 15 Status:</p>
+    <p class="status_text"><%=value15 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id="imageLED16" src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED16").src = COLOR_dict[<%- JSON.stringify(value16) %>]</script>
+      <form action="/led/in/16" method="post"/>
+        <button type="submit" class="button button4">Check</button>
+      </form>
+    <p>Led 16 Status:</p>
+    <p class="status_text"><%=value16 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id="imageLED17" src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED17").src = COLOR_dict[<%- JSON.stringify(value17) %>]</script>
+      <form action="/led/in/17" method="post"/>
+        <button type="submit" class="button button4">Check</button>
+      </form>
+    <p>Led 17 Status:</p>
+    <p class="status_text"><%=value17 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id="imageLED18" src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED18").src = COLOR_dict[<%- JSON.stringify(value18) %>]</script>
+      <form action="/led/in/18" method="post"/>
+        <button type="submit" class="button button4">Check</button>
+      </form>
+    <p>Led 18 Status:</p>
+    <p class="status_text"><%=value18 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id="imageLED19" src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED19").src = COLOR_dict[<%- JSON.stringify(value19) %>]</script>
+      <form action="/led/in/19" method="post"/>
+        <button type="submit" class="button button4">Check</button>
+      </form>
+    <p>Led 19 Status:</p>
+    <p class="status_text"><%=value19 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id="imageLED20" src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED20").src = COLOR_dict[<%- JSON.stringify(value20) %>]</script>
+      <form action="/led/in/20" method="post"/>
+        <button type="submit" class="button button4">Check</button>
+      </form>
+    <p>Led 20 Status:</p>
+    <p class="status_text"><%=value20 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id="imageLED21" src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED21").src = COLOR_dict[<%- JSON.stringify(value21) %>]</script>
+      <form action="/led/in/21" method="post"/>
+        <button type="submit" class="button button4">Check</button>
+      </form>
+    <p>Led 21 Status:</p>
+    <p class="status_text"><%=value21 %></p>
+  </div>
+ 
+  <div class="BorderMargin_LED">
+    <image id="imageLED22" src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED22").src = COLOR_dict[<%- JSON.stringify(value22) %>]</script>
+      <form action="/led/in/22" method="post"/>
+        <button type="submit" class="button button4">Check</button>
+      </form>
+    <p>Led 22 Status:</p>
+    <p class="status_text"><%=value22 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id="imageLED23" src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED23").src = COLOR_dict[<%- JSON.stringify(value23) %>]</script>
+      <form action="/led/in/23" method="post"/>
+        <button type="submit" class="button button4">Check</button>
+      </form>
+    <p>Led 23 Status:</p>
+    <p class="status_text"><%=value23 %></p>
+  </div>
+
+  <div class="BorderMargin_LED">
+    <image id="imageLED24" src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED24").src = COLOR_dict[<%- JSON.stringify(value24) %>]</script>
+      <form action="/led/in/24" method="post"/>
+        <button type="submit" class="button button4">Check</button>
+      </form>
+    <p>Led 24 Status:</p>
+    <p class="status_text"><%=value24 %></p>
+  </div>
+
+
+  <div class="BorderMargin_LED">
+    <image id="imageLED25" src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED25").src = COLOR_dict[<%- JSON.stringify(value25) %>]</script>
+      <form action="/led/in/25" method="post"/>
+        <button type="submit" class="button button4">Check</button>
+      </form>
+    <p>Led 25 Status:</p>
+    <p class="status_text"><%=value25 %></p>
+  </div>
+
+
+  <div class="BorderMargin_LED">
+    <image id="imageLED26" src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
+      <script>document.getElementById("imageLED26").src = COLOR_dict[<%- JSON.stringify(value26) %>]</script>
+      <form action="/led/in/26" method="post"/>
+        <button type="submit" class="button button4">Check</button>
+      </form>
+    <p>Led 26 Status:</p>
+    <p class="status_text"><%=value26 %></p>
+  </div>
+
+</div>
+
+<div>
+	<image src = '/images/nodejs-logo.png' alt="LOGO" style="width:180px;height:180px;  float: right;">
+	<image src = '/images/rpi-logo.png' alt="LOGO" style="width:140px;height:180px;  float: right;">
+        <image src = '/images/github.png' alt="LOGO" style="width:200px;height:200px;  float: right;">
+
+</div>
+
+<script>
+</script>
+
+</body>
+<!-- The below code is only for look and styling -->
+
+
+

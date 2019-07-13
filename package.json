@@ -1,0 +1,13 @@
+{
+  "name": "Webserver-with-GPIO-access",
+  "author": "Stefan Chalupka",
+  "version": "1.0.0",
+  "description": "This is a webserver with node.js. The server makes an access to GPIO-Pins",
+  "main": "index.js",
+  "license": "GNU",
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.3",
+    "rpi-gpio": "^0.8.1"
+  }
+}
