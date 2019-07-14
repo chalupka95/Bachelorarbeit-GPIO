@@ -78,7 +78,7 @@
  
   <div id='border1led1' class="BorderMargin_LED">
     <image id='image1LED1' class='imageLED' src="/images/LED3.png" alt="LED" style="width:120px;height:120px;">
-	<script>website_dynamic(1,1, <%- JSON.stringify(value1) %>);</script>
+	<script>website_dynamic(1,1, <%- JSON.stringify(direction)%>['value1'], <%- JSON.stringify(value1)%>);</script>
 	<form action="/led/out/1" method="post">
        <button id='botton1' type="submit" class="button button4">LED 1 </button>
       </form>
@@ -89,7 +89,7 @@
 
   <div id='border1led2' class="BorderMargin_LED">
     <image id='image1LED2' src="/images/LED3.png" alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(2,1, <%- JSON.stringify(value2) %>);</script>
+      <script>website_dynamic(2,1, <%- JSON.stringify(direction)%>['value2'], <%- JSON.stringify(value2)%>);</script>
       <form action="/led/out/2" method="post">
       <button type="submit" class="button button4">LED 2 </button>
       </form>
@@ -100,7 +100,7 @@
 
   <div id='border1led3' class="BorderMargin_LED">
     <image id='image1LED3' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(3,1, <%- JSON.stringify(value3) %>);</script>
+      <script>website_dynamic(3,1, <%- JSON.stringify(direction)%>['value3'], <%- JSON.stringify(value3)%>);</script>
       <form action="/led/out/3" method="post">
        <button type="submit" class="button button4">LED 3 </button>
       </form>
@@ -111,7 +111,7 @@
 
   <div id='border1led4' class="BorderMargin_LED">
     <image id='image1LED4' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(4,1, <%- JSON.stringify(value4) %>);</script>
+      <script>website_dynamic(4,1, <%- JSON.stringify(direction)%>['value4'], <%- JSON.stringify(value4)%>);</script>
       <form action="/led/out/4" method="post">
        <button type="submit" class="button button4">LED 4 </button>
       </form>
@@ -121,7 +121,7 @@
 
   <div id='border1led5' class="BorderMargin_LED">
     <image id='image1LED5' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(5,1, <%- JSON.stringify(value5) %>);</script>
+      <script>website_dynamic(5,1, <%- JSON.stringify(direction)%>['value5'], <%- JSON.stringify(value5)%>);</script>
       <form action="/led/out/5" method="post">
        <button type="submit" class="button button4">LED 5 </button>
       </form>
@@ -132,7 +132,7 @@
 
   <div id='border1led6' class="BorderMargin_LED">
     <image id='image1LED6' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(6,1, <%- JSON.stringify(value6) %>);</script>
+      <script>website_dynamic(6,1, <%- JSON.stringify(direction)%>['value6'], <%- JSON.stringify(value6)%>);</script>
       <form action="/led/out/6" method="post">
        <button type="submit" class="button button4">LED 6 </button>
       </form>
@@ -142,7 +142,7 @@
 
   <div id='border1led7' class="BorderMargin_LED">
     <image id='image1LED7' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(7,1, <%- JSON.stringify(value7) %>);</script>
+      <script>website_dynamic(7,1, <%- JSON.stringify(direction)%>['value7'], <%- JSON.stringify(value7)%>);</script>
       <form action="/led/out/7" method="post">
        <button type="submit" class="button button4">LED 7 </button>
       </form>
@@ -152,7 +152,7 @@
 
   <div id='border1led8' class="BorderMargin_LED">
     <image id='image1LED8' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(8,1, <%- JSON.stringify(value8) %>);</script>
+      <script>website_dynamic(8,1, <%- JSON.stringify(direction)%>['value8'], <%- JSON.stringify(value8)%>);</script>
       <form action="/led/out/8" method="post">
         <button type="submit" class="button button4">LED 8 </button>
       </form>
@@ -162,7 +162,7 @@
 
   <div id='border1led9' class="BorderMargin_LED">
     <image id='image1LED9' src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(9,1, <%- JSON.stringify(value9) %>);</script>
+      <script>website_dynamic(9,1, <%- JSON.stringify(direction)%>['value9'], <%- JSON.stringify(value9)%>);</script>
       <form action="/led/out/9" method="post"/>
         <button type="submit" class="button button4">LED 9 </button>
       </form>
@@ -172,7 +172,7 @@
 
   <div id='border1led10' class="BorderMargin_LED">
     <image id='image1LED10' src = '/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(10,1, <%- JSON.stringify(value10) %>);</script>
+      <script>website_dynamic(10,1, <%- JSON.stringify(direction)%>['value10'], <%- JSON.stringify(value10)%>);</script>
       <form action="/led/out/10" method="post"/>
         <button type="submit" class="button button4">LED 10 </button>
       </form>
@@ -182,7 +182,7 @@
 
   <div id='border1led11' class="BorderMargin_LED">
     <image id='image1LED11' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(11,1, <%- JSON.stringify(value11) %>);</script>
+      <script>website_dynamic(11,1, <%- JSON.stringify(direction)%>['value11'], <%- JSON.stringify(value11)%>);</script>
       <form action="/led/out/11" method="post"/>
         <button type="submit" class="button button4">LED 11 </button>
       </form>
@@ -192,7 +192,7 @@
 
   <div id='border1led12' class="BorderMargin_LED">
     <image id='image1LED12' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(12,1, <%- JSON.stringify(value12) %>);</script>
+      <script>website_dynamic(12,1, <%- JSON.stringify(direction)%>['value12'], <%- JSON.stringify(value12)%>);</script>
       <form action="/led/out/12" method="post"/>
         <button type="submit" class="button button4">LED 12 </button>
       </form>
@@ -202,7 +202,7 @@
 
   <div id='border1led13' class="BorderMargin_LED">
     <image id='image1LED13' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(13,1, <%- JSON.stringify(value13) %>);</script>
+      <script>website_dynamic(13,1, <%- JSON.stringify(direction)%>['value13'], <%- JSON.stringify(value13)%>);</script>
       <form action="/led/out/13" method="post"/>
         <button type="submit" class="button button4">LED 13 </button>
       </form>
@@ -212,7 +212,7 @@
 
   <div id='border1led14' class="BorderMargin_LED">
     <image id='image1LED14' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(14,1, <%- JSON.stringify(value14) %>);</script>
+      <script>website_dynamic(14,1, <%- JSON.stringify(direction)%>['value14'], <%- JSON.stringify(value14)%>);</script>
       <form action="/led/out/14" method="post"/>
         <button type="submit" class="button button4">LED 14 </button>
       </form>
@@ -222,7 +222,7 @@
 
   <div id='border1led15' class="BorderMargin_LED">
     <image id='image1LED15' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(15,1, <%- JSON.stringify(value15) %>);</script>
+      <script>website_dynamic(15,1, <%- JSON.stringify(direction)%>['value15'], <%- JSON.stringify(value15)%>);</script>
       <form action="/led/out/15" method="post"/>
         <button type="submit" class="button button4">LED 15 </button>
       </form>
@@ -232,7 +232,7 @@
 
   <div id='border1led16' class="BorderMargin_LED">
     <image id='image1LED16' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(16,1, <%- JSON.stringify(value16) %>);</script>
+      <script>website_dynamic(16,1, <%- JSON.stringify(direction)%>['value16'], <%- JSON.stringify(value16)%>);</script>
       <form action="/led/out/16" method="post"/>
         <button type="submit" class="button button4">LED 16 </button>
       </form>
@@ -242,7 +242,7 @@
 
   <div id='border1led17' class="BorderMargin_LED">
     <image id='image1LED17' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(17,1, <%- JSON.stringify(value17) %>);</script>
+      <script>website_dynamic(17,1, <%- JSON.stringify(direction)%>['value17'], <%- JSON.stringify(value17)%>);</script>
       <form action="/led/out/17" method="post"/>
         <button type="submit" class="button button4">LED 17 </button>
       </form>
@@ -252,7 +252,7 @@
 
   <div id='border1led18' class="BorderMargin_LED">
     <image id='image1LED18' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(18,1, <%- JSON.stringify(value18) %>);</script>
+      <script>website_dynamic(18,1, <%- JSON.stringify(direction)%>['value18'], <%- JSON.stringify(value18)%>);</script>
       <form action="/led/out/18" method="post"/>
         <button type="submit" class="button button4">LED 18 </button>
       </form>
@@ -262,7 +262,7 @@
 
   <div id='border1led19' class="BorderMargin_LED">
     <image id='image1LED19' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(19,1, <%- JSON.stringify(value19) %>);</script>
+      <script>website_dynamic(19,1, <%- JSON.stringify(direction)%>['value19'], <%- JSON.stringify(value19)%>);</script>
       <form action="/led/out/19" method="post"/>
         <button type="submit" class="button button4">LED 19 </button>
       </form>
@@ -272,7 +272,7 @@
 
   <div id='border1led20' class="BorderMargin_LED">
     <image id='image1LED20' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(20,1, <%- JSON.stringify(value20) %>);</script>
+      <script>website_dynamic(20,1, <%- JSON.stringify(direction)%>['value20'], <%- JSON.stringify(value20)%>);</script>
       <form action="/led/out/20" method="post"/>
         <button type="submit" class="button button4">LED 20 </button>
       </form>
@@ -282,7 +282,7 @@
 
   <div id='border1led21' class="BorderMargin_LED">
     <image id='image1LED21' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(21,1, <%- JSON.stringify(value21) %>);</script>
+      <script>website_dynamic(21,1, <%- JSON.stringify(direction)%>['value21'], <%- JSON.stringify(value21)%>);</script>
       <form action="/led/out/21" method="post"/>
         <button type="submit" class="button button4">LED 21 </button>
       </form>
@@ -292,7 +292,7 @@
 
   <div id='border1led22' class="BorderMargin_LED">
     <image id='image1LED22' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(22,1, <%- JSON.stringify(value22) %>);</script>
+      <script>website_dynamic(22,1, <%- JSON.stringify(direction)%>['value22'], <%- JSON.stringify(value22)%>);</script>
       <form action="/led/out/22" method="post"/>
         <button type="submit" class="button button4">LED 22 </button>
       </form>
@@ -302,7 +302,7 @@
 
   <div id='border1led23' class="BorderMargin_LED">
     <image id='image1LED23' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(23,1, <%- JSON.stringify(value23) %>);</script>
+      <script>website_dynamic(23,1, <%- JSON.stringify(direction)%>['value23'], <%- JSON.stringify(value23)%>);</script>
       <form action="/led/out/23" method="post"/>
         <button type="submit" class="button button4">LED 23 </button>
       </form>
@@ -312,7 +312,7 @@
 
   <div id='border1led24' class="BorderMargin_LED">
     <image id='image1LED24' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(24,1, <%- JSON.stringify(value24) %>);</script>
+      <script>website_dynamic(24,1, <%- JSON.stringify(direction)%>['value24'], <%- JSON.stringify(value24)%>);</script>
       <form action="/led/out/24" method="post"/>
         <button type="submit" class="button button4">LED 24 </button>
       </form>
@@ -322,7 +322,7 @@
 
   <div id='border1led25' class="BorderMargin_LED">
     <image id='image1LED25' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(25,1, <%- JSON.stringify(value25) %>);</script>
+      <script>website_dynamic(25,1, <%- JSON.stringify(direction)%>['value25'], <%- JSON.stringify(value25)%>);</script>
       <form action="/led/out/25" method="post"/>
         <button type="submit" class="button button4">LED 25 </button>
       </form>
@@ -332,7 +332,7 @@
 
   <div id='border1led26' class="BorderMargin_LED">
     <image id='image1LED26' src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(26,1, <%- JSON.stringify(value26) %>);</script>
+      <script>website_dynamic(26,1, <%- JSON.stringify(direction)%>['value26'], <%- JSON.stringify(value26)%>);</script>
       <form action="/led/out/26" method="post"/>
         <button type="submit" class="button button4">LED 26 </button>
       </form>
@@ -349,7 +349,7 @@
 
   <div id='border2led1' class="BorderMargin_LED">
     <image id="image2LED1" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(1,2,  <%- JSON.stringify(value1) %>);</script>
+      <script>website_dynamic(1,2,  <%- JSON.stringify(direction)%>['value1'], <%- JSON.stringify(value1)%>);</script>
       <form action="/led/in/1" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -360,7 +360,7 @@
 
   <div id='border2led2' class="BorderMargin_LED">
     <image id="image2LED2" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(2,2, <%- JSON.stringify(value2) %>);</script>
+      <script>website_dynamic(2,2, <%- JSON.stringify(direction)%>['value2'], <%- JSON.stringify(value2)%>);</script>
       <form action="/led/in/2" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -371,7 +371,7 @@
 
   <div id='border2led3' class="BorderMargin_LED">
     <image id="image2LED3" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(3,2, <%- JSON.stringify(value3) %>);</script>
+      <script>website_dynamic(3,2, <%- JSON.stringify(direction)%>['value3'], <%- JSON.stringify(value3)%>);</script>
       <form action="/led/in/3" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -382,7 +382,7 @@
 
   <div id='border2led4' class="BorderMargin_LED">
     <image id="image2LED4" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(4,2, <%- JSON.stringify(value4) %>);</script>
+      <script>website_dynamic(4,2, <%- JSON.stringify(direction)%>['value4'], <%- JSON.stringify(value4)%>);</script>
       <form action="/led/in/4" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -393,7 +393,7 @@
 
   <div id='border2led5' class="BorderMargin_LED">
     <image id="image2LED5" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(5,2, <%- JSON.stringify(value5) %>);</script>
+      <script>website_dynamic(5,2, <%- JSON.stringify(direction)%>['value5'], <%- JSON.stringify(value5)%>);</script>
       <form action="/led/in/5" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -404,7 +404,7 @@
 
   <div id='border2led6' class="BorderMargin_LED">
     <image id="image2LED6" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(6,2, <%- JSON.stringify(value6) %>);</script>
+      <script>website_dynamic(6,2, <%- JSON.stringify(direction)%>['value6'], <%- JSON.stringify(value6)%>);</script>
       <form action="/led/in/6" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -415,7 +415,7 @@
 
   <div id='border2led7' class="BorderMargin_LED">
     <image id="image2LED7" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(7,2, <%- JSON.stringify(value7) %>);</script>
+      <script>website_dynamic(7,2, <%- JSON.stringify(direction)%>['value7'], <%- JSON.stringify(value7)%>);</script>
       <form action="/led/in/7" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -426,7 +426,7 @@
 
   <div id='border2led7' class="BorderMargin_LED">
     <image id="image2LED8" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(8,2, <%- JSON.stringify(value8) %>);</script>
+      <script>website_dynamic(8,2, <%- JSON.stringify(direction)%>['value8'], <%- JSON.stringify(value8)%>);</script>
       <form action="/led/in/" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -437,7 +437,7 @@
 
   <div id='border2led9' class="BorderMargin_LED">
     <image id="image2LED9" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(9,2, <%- JSON.stringify(value9) %>);</script>
+      <script>website_dynamic(9,2, <%- JSON.stringify(direction)%>['value9'], <%- JSON.stringify(value9)%>);</script>
       <form action="/led/in/9" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -448,7 +448,7 @@
 
   <div id='border2led10' class="BorderMargin_LED">
     <image id="image2LED10" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(10,2, <%- JSON.stringify(value10) %>);</script>
+      <script>website_dynamic(10,2, <%- JSON.stringify(direction)%>['value10'], <%- JSON.stringify(value10)%>);</script>
       <form action="/led/in/10" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -459,7 +459,7 @@
 
   <div id='border2led11' class="BorderMargin_LED">
     <image id="image2LED11" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(11,2, <%- JSON.stringify(value11) %>);</script>
+      <script>website_dynamic(11,2, <%- JSON.stringify(direction)%>['value11'], <%- JSON.stringify(value11)%>);</script>
       <form action="/led/in/11" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -470,7 +470,7 @@
 
   <div id='border2led12' class="BorderMargin_LED">
     <image id="image2LED12" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(12,2, <%- JSON.stringify(value12) %>);</script>
+      <script>website_dynamic(12,2, <%- JSON.stringify(direction)%>['value12'], <%- JSON.stringify(value12)%>);</script>
       <form action="/led/in/12" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -481,7 +481,7 @@
 
   <div id='border2led13' class="BorderMargin_LED">
     <image id="image2LED13" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(13,2, <%- JSON.stringify(value13) %>);</script>
+      <script>website_dynamic(13,2, <%- JSON.stringify(direction)%>['value13'], <%- JSON.stringify(value13)%>);</script>
       <form action="/led/in/13" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -492,7 +492,7 @@
 
   <div id='border2led14' class="BorderMargin_LED">
     <image id="image2LED14" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(14,2, <%- JSON.stringify(value14) %>);</script>
+      <script>website_dynamic(14,2, <%- JSON.stringify(direction)%>['value14'], <%- JSON.stringify(value14)%>);</script>
       <form action="/led/in/14" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -502,7 +502,7 @@
 
   <div id='border2led15' class="BorderMargin_LED">
     <image id="image2LED15" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(15,2, <%- JSON.stringify(value15) %>);</script>
+      <script>website_dynamic(15,2, <%- JSON.stringify(direction)%>['value15'], <%- JSON.stringify(value15)%>);</script>
       <form action="/led/in/15" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -512,7 +512,7 @@
 
   <div id='border2led16' class="BorderMargin_LED">
     <image id="image2LED16" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(16,2, <%- JSON.stringify(value16) %>);</script>
+      <script>website_dynamic(16,2, <%- JSON.stringify(direction)%>['value16'], <%- JSON.stringify(value16)%>);</script>
       <form action="/led/in/16" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -522,7 +522,7 @@
 
   <div id='border2led17' class="BorderMargin_LED">
     <image id="image2LED17" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(17,2, <%- JSON.stringify(value17) %>);</script>
+      <script>website_dynamic(17,2, <%- JSON.stringify(direction)%>['value17'], <%- JSON.stringify(value17)%>);</script>
       <form action="/led/in/17" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -532,7 +532,7 @@
 
   <div id='border2led18' class="BorderMargin_LED">
     <image id="image2LED18" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(18,2, <%- JSON.stringify(value18) %>);</script>
+      <script>website_dynamic(18,2, <%- JSON.stringify(direction)%>['value18'], <%- JSON.stringify(value18)%>);</script>
       <form action="/led/in/18" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -542,7 +542,7 @@
 
   <div id='border2led19' class="BorderMargin_LED">
     <image id="image2LED19" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(19,2, <%- JSON.stringify(value19) %>);</script>
+      <script>website_dynamic(19,2, <%- JSON.stringify(direction)%>['value19'], <%- JSON.stringify(value19)%>);</script>
       <form action="/led/in/19" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -552,7 +552,7 @@
 
   <div id='border2led20' class="BorderMargin_LED">
     <image id="image2LED20" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(20,2, <%- JSON.stringify(value20) %>);</script>
+      <script>website_dynamic(20,2, <%- JSON.stringify(direction)%>['value20'], <%- JSON.stringify(value20)%>);</script>
       <form action="/led/in/20" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -562,7 +562,7 @@
 
   <div id='border2led21' class="BorderMargin_LED">
     <image id="image2LED21" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(21,2, <%- JSON.stringify(value21) %>);</script>
+      <script>website_dynamic(21,2, <%- JSON.stringify(direction)%>['value21'], <%- JSON.stringify(value21)%>);</script>
       <form action="/led/in/21" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -572,7 +572,7 @@
  
   <div id='border2led22' class="BorderMargin_LED">
     <image id="image2LED22" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(22,2, <%- JSON.stringify(value22) %>);</script>
+      <script>website_dynamic(22,2, <%- JSON.stringify(direction)%>['value22'], <%- JSON.stringify(value22)%>);</script>
       <form action="/led/in/22" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -582,7 +582,7 @@
 
   <div id='border2led23' class="BorderMargin_LED">
     <image id="image2LED23" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(23,2, <%- JSON.stringify(value23) %>);</script>
+      <script>website_dynamic(23,2, <%- JSON.stringify(direction)%>['value23'], <%- JSON.stringify(value23)%>);</script>
       <form action="/led/in/23" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -592,7 +592,7 @@
 
   <div id='border2led24' class="BorderMargin_LED">
     <image id="image2LED24" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(24,2, <%- JSON.stringify(value24) %>);</script>
+      <script>website_dynamic(24,2, <%- JSON.stringify(direction)%>['value24'], <%- JSON.stringify(value24)%>);</script>
       <form action="/led/in/24" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -603,7 +603,7 @@
 
   <div id='border2led25' class="BorderMargin_LED">
     <image id="image2LED25" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(25,2, <%- JSON.stringify(value25) %>);</script>
+      <script>website_dynamic(25,2, <%- JSON.stringify(direction)%>['value25'], <%- JSON.stringify(value25)%>);</script>
       <form action="/led/in/25" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>
@@ -614,7 +614,7 @@
 
   <div id='border2led26' class="BorderMargin_LED">
     <image id="image2LED26" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
-      <script>website_dynamic(26,2, <%- JSON.stringify(value26) %>);</script>
+      <script>website_dynamic(26,2, <%- JSON.stringify(direction)%>['value26'], <%- JSON.stringify(value26)%>);</script>
       <form action="/led/in/26" method="post"/>
         <button type="submit" class="button button4">Check</button>
       </form>

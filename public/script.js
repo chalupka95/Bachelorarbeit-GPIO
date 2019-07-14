@@ -23,6 +23,7 @@ function make_direction(direction) {
                 if (direction == 'out') document.getElementById('border1'+x).style.display='initial';
                 if (direction == 'in')  document.getElementById('border2'+x).style.display='initial';}};
 
-function website_dynamic(led, border, value) {
+function website_dynamic(led, border, direction, value) {
         document.getElementById('image'+border+'LED'+led).src = COLOR_dict[value];
-        if (value != 'not set') document.getElementById('border'+border+'led'+led).style.display='initial';};
+        if ((direction == 'out') && (border == 1)) document.getElementById('border'+border+'led'+led).style.display='initial';
+        if ((direction == 'in')  && (border == 2)) document.getElementById('border'+border+'led'+led).style.display='initial';};

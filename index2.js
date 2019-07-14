@@ -1,12 +1,14 @@
-var express = require('express');
-var Gpio = require('./GPIO.js');
-var app = express();
-var path = require('path');
-var gpio = require('rpi-gpio');
-var status_txt1="Press Button To change Status of Led ";
-var status_txt2='Led is On';
-var status_txt3="Led is Off";
-const LOGGING =true
+var express 	= require('express');
+var Gpio 	= require('./GPIO.js');
+var path 	= require('path');
+//var gpio 	= require('rpi-gpio');
+var app 	= express();
+const LOGGING 	=true;
+
+var status_txt1	="Press Button To change Status of Led ";
+var status_txt2	='Led is On';
+var status_txt3	="Led is Off";
+
 var LEDs_dict = {
 value1:'not set',
 value2:'not set',
@@ -34,6 +36,33 @@ value23:'not set',
 value24:'not set',
 value25:'not set',
 value26:'not set',
+direction:{
+value1:'not set',
+value2:'not set',
+value3:'not set',
+value4:'not set',
+value5:'not set',
+value6:'not set',
+value7:'not set',
+value8:'not set',
+value9:'not set',
+value10:'not set',
+value11:'not set',
+value12:'not set',
+value13:'not set',
+value14:'not set',
+value15:'not set',
+value16:'not set',
+value17:'not set',
+value18:'not set',
+value19:'not set',
+value20:'not set',
+value21:'not set',
+value22:'not set',
+value23:'not set',
+value24:'not set',
+value25:'not set',
+value26:'not set',}
 }
 
 /*
@@ -95,7 +124,7 @@ value24:24,
 value25:25,
 value26:26,
 }
-
+/*
 //export Pins for use purpose
 Gpio.setDirection(GPIO_dict['value1'], 'out', function() {});
 Gpio.setDirection(GPIO_dict['value2'], 'out', function() {});
@@ -123,7 +152,7 @@ Gpio.setDirection(GPIO_dict['value23'], 'in', function() {});
 Gpio.setDirection(GPIO_dict['value24'], 'in', function() {});
 Gpio.setDirection(GPIO_dict['value25'], 'in', function() {});
 Gpio.setDirection(GPIO_dict['value26'], 'in', function() {});
-
+*/
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -158,8 +187,11 @@ app.post('/led/in/\*', function(req, res){
 
 app.post('/led/export/*', function(req, res){
         tmp = req.url.substr(12, 3);
-        if (LOGGING) console.log(tmp);
-        if (LOGGING) console.log(req.body);
+	list = req.body
+	list.forEach(function(led) {
+		//console.log(LEDs_dict['direction']['value'+led.substr(3,2)]);
+		Gpio.setDirection(GPIO_dict['value'+led.substr(3,2)], tmp, function() {LEDs_dict['direction']['value'+led.substr(3,2)]=tmp});
+	});
         return res.render('index2', LEDs_dict);});
 
 
