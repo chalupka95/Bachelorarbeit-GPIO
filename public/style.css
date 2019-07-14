@@ -59,6 +59,7 @@ p.status_text {
    height: 280px;
    border: 2px solid black;
    border-radius: 6px;
+   display:none; //visibility:hidden
 }
 
 div.start_led {

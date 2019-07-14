@@ -6,8 +6,7 @@ var gpio = require('rpi-gpio');
 var status_txt1="Press Button To change Status of Led ";
 var status_txt2='Led is On';
 var status_txt3="Led is Off";
-
-
+const LOGGING =true
 var LEDs_dict = {
 value1:'not set',
 value2:'not set',
@@ -111,7 +110,6 @@ Gpio.setDirection(GPIO_dict['value10'], 'out', function() {});
 Gpio.setDirection(GPIO_dict['value11'], 'out', function() {});
 Gpio.setDirection(GPIO_dict['value12'], 'out', function() {});
 Gpio.setDirection(GPIO_dict['value13'], 'out', function() {});
-
 Gpio.setDirection(GPIO_dict['value14'], 'in', function() {});
 Gpio.setDirection(GPIO_dict['value15'], 'in', function() {});
 Gpio.setDirection(GPIO_dict['value16'], 'in', function() {});
@@ -129,43 +127,41 @@ Gpio.setDirection(GPIO_dict['value26'], 'in', function() {});
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 app.get('/\*', function(req, res){
- 	res.render('index2',LEDs_dict);});
+ 	res.render('index2', LEDs_dict);});
 
 
 app.post('/led/out/\*', function(req, res){
 	tmp = req.url.substr(9, 2);
-
-	if (LEDs_dict['value'+tmp] == 'not set') LEDs_dict['value'+tmp]=1;
+	if (LEDs_dict['value'+tmp] == 'not set') LEDs_dict['value'+tmp]=0;
 	LEDs_dict['value'+tmp] = 1 - LEDs_dict['value'+tmp];
 	Gpio.writeValue(GPIO_dict['value'+tmp], LEDs_dict['value'+tmp], function(err) {
         	if (err) throw err;
-        	console.log('Written '+LEDs_dict['value'+tmp]+' to pin '+ GPIO_dict['value'+tmp]);
-		console.log(req.ip);
+        	if (LOGGING) console.log('Written '+LEDs_dict['value'+tmp]+' to pin '+ GPIO_dict['value'+tmp]);
+		if (LOGGING) console.log(req.ip);
 		return res.render('index2', LEDs_dict);
-    });
-});
+    });});
 
 app.post('/led/in/\*', function(req, res){
         tmp = req.url.substr(8, 2);
-	console.log(tmp);
+	if (LOGGING) console.log(tmp);
         Gpio.readValue(GPIO_dict['value'+tmp], function(data) {
-                console.log('Read '+data.substr(0, 1) +' from pin '+ GPIO_dict['value'+tmp]);
+                if (LOGGING) console.log('Read '+data.substr(0, 1) +' from pin '+ GPIO_dict['value'+tmp]);
 		LEDs_dict['value'+tmp]= data.substr(0, 1);
-                console.log(req.ip);
+                if (LOGGING) console.log(req.ip);
                 return res.render('index2', LEDs_dict);
-    });
-});
+    });});
 
 
 app.post('/led/export/*', function(req, res){
-        tmp = req.url.substr(11, 2);
-        console.log(tmp);
-	console.log(req);
+        tmp = req.url.substr(12, 3);
+        if (LOGGING) console.log(tmp);
+        if (LOGGING) console.log(req.body);
         return res.render('index2', LEDs_dict);});
 
 
 app.listen(3000, function () {
-  console.log('Simple LED Control Server Started on Port: 3000!')
-});
+  console.log('Simple LED Control Server Started on Port: 3000!')});

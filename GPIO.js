@@ -21,7 +21,7 @@ exports.open = function (Pin, callback) {
 	else fs.writeFile(path+ 'export', Pin, function (err) {
 		if (err) console.log(err);
 		else {console.log('Pin '+ Pin+ ' opened');
-			setTimeout(callback, 50);};});}
+			setTimeout(callback, 100);};});}
 
 
 exports.close = function (Pin, callback) {
