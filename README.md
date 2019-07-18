@@ -21,3 +21,6 @@ http://ip-raspberrypi:port/
 
 
 [GitHub](http://github.com/chalupka95)
+
+### ---Bemerkungen---
+installation fehlerhaft?
