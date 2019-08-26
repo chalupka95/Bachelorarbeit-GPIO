@@ -27,7 +27,7 @@ pin13:'not set',pin14:'not set',pin15:'not set',pin16:'not set',
 pin17:'not set',pin18:'not set',pin19:'not set',pin20:'not set',
 pin21:'not set',pin22:'not set',pin23:'not set',pin24:'not set',
 pin25:'not set',pin26:'not set'},
-hinweise:'not set'
+hinweise:''
 }
 
 
@@ -63,33 +63,35 @@ value26:13,//GPIO_27
 */
 
 const GPIO_dict = {
-value1:1,
-value2:2,
-value3:3,
-value4:4,
-value5:5,
-value6:6,
-value7:7,
-value8:8,
-value9:9,
-value10:10,
-value11:11,
-value12:12,
-value13:13,
-value14:14,
-value15:15,
-value16:16,
-value17:17,
-value18:18,
-value19:19,
-value20:20,
-value21:21,
-value22:22,
-value23:23,
-value24:24,
-value25:25,
-value26:26,
+value1:27,	//13	//1 doesnt exist
+value2:2,	//3
+value3:3,	//5
+value4:4,	//7
+value5:5,	//29
+value6:6,	//31
+value7:7,	//26
+value8:8,	//24
+value9:9,	//21
+value10:10,	//19
+value11:11,	//23
+value12:12,	//32
+value13:13,	//33
+value14:14,	//8
+value15:15,	//10
+value16:16,	//36
+value17:17,	//11
+value18:18,	//12
+value19:19,	//35
+value20:20,	//38
+value21:21,	//40
+value22:22,	//15
+value23:23,	//16
+value24:24,	//18
+value25:25,	//22
+value26:26,	//37
 }
+
+
 /*
 //export Pins for use purpose
 Gpio.setDirection(GPIO_dict['value1'], 'out', function() {});
@@ -125,39 +127,48 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-        direction=      req.body['direction']
-        value=          req.body['value']
-	LEDs_dict['hinweis']=''
-        for (var key in direction) {
-                if ((direction[key] != 'not set') && (direction[key] != LEDs_dict['direction']['pin'+key.substr(3,2)])) {
-                        Gpio.setDirection(GPIO_dict['value'+key.substr(3,2)], direction[key], function() {
-				LEDs_dict['direction']['pin'+key.substr(3,2)]=direction[key];
-                        	LEDs_dict['value']['pin'+key.substr(3,2)]='not set'});
-                }else{
-                        if (LEDs_dict['direction']['pin'+key.substr(3,2)] != 'not set') {
-                                Gpio.close(key.substr(3,2), function() {
-                                        console.log('pin'+key.substr(3,2)+' unexported');
-                                        LEDs_dict['value']['pin'+key.substr(3,2)]='not set';
-                                        LEDs_dict['direction']['pin'+key.substr(3,2)] = 'not set'})}
-        }}
-        for (var key in value) {
-                if (value[key] != 'not set') {
-                        if (LEDs_dict['direction']['pin'+key.substr(3,2)] == 'out') {
-                                Gpio.writeValue(GPIO_dict['value'+key.substr(3,2)], value[key], function(err) {
+        directions=      req.body['direction'];
+        values=          req.body['value'];
+	LEDs_dict['hinweise']=''
+        for (direction in directions) {
+		id=direction.substr(3,2)
+		if ((directions[direction] == LEDs_dict['direction'][direction])) {
+			console.log('Nothing to do'); }
+		else {
+	                if (directions[direction] != 'not set') {
+				LEDs_dict['direction']['pin'+id]=directions[direction];
+				LEDs_dict['value']['pin'+id]='not set';
+	                        Gpio.setDirection(GPIO_dict['value'+id], directions[direction], function() {
+					console.log('Pin'+id+' direction is '+directions[direction]);
+					});
+	                }else{
+	                        Gpio.close(direction.substr(3,2), function() {
+	                                console.log('pin'+direction.substr(3,2)+' unexported');
+					LEDs_dict['direction'][direction]='not set';
+	                                LEDs_dict['value'][direction] = 'not set'
+				})
+			}
+        	}
+	}
+        for (let value in values) {
+		var before=LEDs_dict['value'][value]
+		if ((values[value] == LEDs_dict['direction'][value])) {
+			console.log('Nothing to do');
+		} else {
+                        if (LEDs_dict['direction'][value] == 'out') {
+				LEDs_dict['value'][value]=values[value];
+                                Gpio.writeValue(GPIO_dict['value'+value.substr(3,2)], values[value], function(err) {
                                         if (err) {
-                                                if (LEDs_dict['hinweis']=='') {LEDs_dict['hinweis']=err+'\n'}
-						else{LEDs_dict['hinweis']=LEDs_dict['hinweis']+err+'\n'}
-                                        }else{
-                                                LEDs_dict['value']['pin'+key.substr(3,2)]=value[key]
-						if (LEDs_dict['hinweis']=='') {LEDs_dict['hinweis']='Pin'+key.substr(3,2)+' is set to '+value[key] +'\n'}
-                                                else{LEDs_dict['hinweis']=LEDs_dict['hinweis']+'Pin'+key.substr(3,2)+' is set to '+value[key] +'\n'}
-					}})
-                        }else{
-                                if (LEDs_dict['hinweis']=='not set') {LEDs_dict['hinweis']='The direction of Pin'+ key.substr(3,2) + " is not 'out' ("+LEDs_dict['direction']['pin'+key.substr(3,2)]+")\n";}
-				else{LEDs_dict['hinweis']=LEDs_dict['hinweis']+'The direction of Pin'+ key.substr(3,2) + " is not 'out' ("+LEDs_dict['direction']['pin'+key.substr(3,2)]+")\n";}
-              		}
-        }}
-        res.json(JSON.stringify(LEDs_dict));
+						throw err
+                                                LEDs_dict['hinweise']+=LEDs_dict['hinweise']+err+'\n'
+                                                LEDs_dict['value'][value]=before}
+				})
+			}else{
+                                LEDs_dict['hinweise']+=LEDs_dict['hinweise']+'The direction of Pin '+ value.substr(3,2) + " is not out, ";
+	              	}
+		}
+	}
+	res.json(JSON.stringify(LEDs_dict))
 });
 
 
@@ -186,10 +197,9 @@ app.post('/led/out/\*', function(req, res){
 
 app.post('/led/in/\*', function(req, res){
         tmp = req.url.substr(8, 2);
-	if (LOGGING) console.log(tmp);
         Gpio.readValue(GPIO_dict['value'+tmp], function(data) {
                 if (LOGGING) console.log('Read '+data.substr(0, 1) +' from pin '+ GPIO_dict['value'+tmp]);
-		LEDs_dict['value']['pin'+tmp]= data.substr(0, 1);
+		LEDs_dict['value']['pin'+tmp]= Number(data.substr(0, 1));
                 if (LOGGING) console.log(req.ip);
                 return res.render('index2', LEDs_dict);
 	});});
@@ -198,15 +208,10 @@ app.post('/led/export/\*', function(req, res){
         direction = req.url.substr(12, 3);
 	list = req.body
 	list.forEach(function(led) {
-		//console.log(LEDs_dict['direction']['value'+led.substr(3,2)]);
 		Gpio.setDirection(GPIO_dict['value'+led.substr(3,2)], direction, function() {LEDs_dict['direction']['pin'+led.substr(3,2)]=direction});
 		LEDs_dict['value']['pin'+led.substr(3,2)]='not set'	});
         return res.render('index2', LEDs_dict);});
 
-
-app.post('/led/JSON/*', function(req, res) {
-        list = req.body
-        return res.render('index2', LEDs_dict);});
 
 app.listen(3000, function () {
   console.log('Simple LED Control Server Started on Port: 3000!')});

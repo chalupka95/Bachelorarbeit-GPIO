@@ -15,6 +15,7 @@ check input:		isValidNumber
 */
 var fs		= require('fs');
 var path	= '/sys/class/gpio/';
+//var path	= '/sys/devices/virtual/gpio';
 
 exports.open = function (Pin, callback) {
 	if (fs.existsSync(path+ 'gpio'+Pin)) console.log('Pin '+ Pin+ ' allready open')
@@ -39,7 +40,6 @@ exports.setDirection = function (Pin, direction, callback) {
                         if (err) console.log(err);
                         else console.log('Direction of Pin '+ Pin+ ' is '+ direction);callback()});}
 	else {
-		console.log('Direction does not exist');
 		exports.open(Pin, function() {
 			fs.writeFile(path+ 'gpio'+Pin+'/direction', direction, function (err) {
                         	if (err) console.log(err);
