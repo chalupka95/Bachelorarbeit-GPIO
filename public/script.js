@@ -1,3 +1,4 @@
+var Reload = false;
 var DIRECTION_list = [];
 var COLOR_dict = {
         '0':'/images/LED.png',
@@ -32,4 +33,14 @@ function make_direction(direction) {
 function website_dynamic(led, border, direction, value) {
         document.getElementById('image'+border+'LED'+led).src = COLOR_dict[value];
         if ((direction == 'out') && (border == 1)) document.getElementById('border'+border+'led'+led).style.display='initial';
-        if ((direction == 'in')  && (border == 2)) document.getElementById('border'+border+'led'+led).style.display='initial';};
+        if ((direction == 'in')  && (border == 2)) {
+		document.getElementById('border'+border+'led'+led).style.display='initial';
+		Reload=true;
+	}
+};
+
+function reload_page() {
+	if (DIRECTION_list.length==0 && Reload==true) {
+		window.location.replace("http://192.168.178.3:3000/");;
+	};
+}

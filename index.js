@@ -92,58 +92,45 @@ value26:26,	//37
 }
 
 
-/*
-//export Pins for use purpose
-Gpio.setDirection(GPIO_dict['value1'], 'out', function() {});
-Gpio.setDirection(GPIO_dict['value2'], 'out', function() {});
-Gpio.setDirection(GPIO_dict['value3'], 'out', function() {});
-Gpio.setDirection(GPIO_dict['value4'], 'out', function() {});
-Gpio.setDirection(GPIO_dict['value5'], 'out', function() {});
-Gpio.setDirection(GPIO_dict['value6'], 'out', function() {});
-Gpio.setDirection(GPIO_dict['value7'], 'out', function() {});
-Gpio.setDirection(GPIO_dict['value8'], 'out', function() {});
-Gpio.setDirection(GPIO_dict['value9'], 'out', function() {});
-Gpio.setDirection(GPIO_dict['value10'], 'out', function() {});
-Gpio.setDirection(GPIO_dict['value11'], 'out', function() {});
-Gpio.setDirection(GPIO_dict['value12'], 'out', function() {});
-Gpio.setDirection(GPIO_dict['value13'], 'out', function() {});
-Gpio.setDirection(GPIO_dict['value14'], 'in', function() {});
-Gpio.setDirection(GPIO_dict['value15'], 'in', function() {});
-Gpio.setDirection(GPIO_dict['value16'], 'in', function() {});
-Gpio.setDirection(GPIO_dict['value17'], 'in', function() {});
-Gpio.setDirection(GPIO_dict['value18'], 'in', function() {});
-Gpio.setDirection(GPIO_dict['value19'], 'in', function() {});
-Gpio.setDirection(GPIO_dict['value20'], 'in', function() {});
-Gpio.setDirection(GPIO_dict['value21'], 'in', function() {});
-Gpio.setDirection(GPIO_dict['value22'], 'in', function() {});
-Gpio.setDirection(GPIO_dict['value23'], 'in', function() {});
-Gpio.setDirection(GPIO_dict['value24'], 'in', function() {});
-Gpio.setDirection(GPIO_dict['value25'], 'in', function() {});
-Gpio.setDirection(GPIO_dict['value26'], 'in', function() {});
-*/
+function update_in_pins(_callback){
+	let dict = LEDs_dict;
+        for (let pin in LEDs_dict['direction']) {
+                if (LEDs_dict['direction'][pin]=='in') {
+                        Gpio.readValue(GPIO_dict['value'+pin.substr(3,2)], function(data) {
+                                dict['value'][pin]= Number(data.substr(0, 1));
+                        });
+                };
+	};
+	_callback(dict);
+}
 
 router.get('/', function(req, res) {
-      	res.json(JSON.stringify(LEDs_dict));
+	update_in_pins(function () {setTimeout(res.json(JSON.stringify(LEDs_dict)), 100)});
 });
 
+
+
 router.post('/', function(req, res) {
-        directions=      req.body['direction'];
-        values=          req.body['value'];
+        let directions=      req.body['direction'];
+        let values=          req.body['value'];
 	LEDs_dict['hinweise']=''
-        for (direction in directions) {
-		id=direction.substr(3,2)
+        for (let direction in directions) {
 		if ((directions[direction] == LEDs_dict['direction'][direction])) {
-			console.log('Nothing to do'); }
-		else {
+			console.log('1Nothing to do');
+		} else {
 	                if (directions[direction] != 'not set') {
-				LEDs_dict['direction']['pin'+id]=directions[direction];
-				LEDs_dict['value']['pin'+id]='not set';
-	                        Gpio.setDirection(GPIO_dict['value'+id], directions[direction], function() {
-					console.log('Pin'+id+' direction is '+directions[direction]);
+				if ((directions[direction]=="in") && ([2,3,4,5,6,7,8,14,15].includes(Number(direction.substr(3,2))))) {
+					console.log('Direction IN doesnt work for Pin'+direction.substr(3,2));
+				} else {
+					LEDs_dict['direction'][direction]=directions[direction];
+					LEDs_dict['value'][direction]='not set';
+	                        	Gpio.setDirection(GPIO_dict['value'+direction.substr(3,2)], directions[direction], function() {
+						console.log('Pin'+direction.substr(3,2)+' direction is '+directions[direction]);
 					});
+				}
 	                }else{
 	                        Gpio.close(direction.substr(3,2), function() {
-	                                console.log('pin'+direction.substr(3,2)+' unexported');
+	                                console.log('Pin'+direction.substr(3,2)+' unexported');
 					LEDs_dict['direction'][direction]='not set';
 	                                LEDs_dict['value'][direction] = 'not set'
 				})
@@ -151,9 +138,9 @@ router.post('/', function(req, res) {
         	}
 	}
         for (let value in values) {
-		var before=LEDs_dict['value'][value]
-		if ((values[value] == LEDs_dict['direction'][value])) {
-			console.log('Nothing to do');
+		let before=LEDs_dict['value'][value]
+		if ((values[value] == LEDs_dict['value'][value])) {
+			console.log('2Nothing to do');
 		} else {
                         if (LEDs_dict['direction'][value] == 'out') {
 				LEDs_dict['value'][value]=values[value];
@@ -164,7 +151,7 @@ router.post('/', function(req, res) {
                                                 LEDs_dict['value'][value]=before}
 				})
 			}else{
-                                LEDs_dict['hinweise']+=LEDs_dict['hinweise']+'The direction of Pin '+ value.substr(3,2) + " is not out, ";
+                                LEDs_dict['hinweise']+=LEDs_dict['hinweise']+'The direction of Pin '+value.substr(3,2)+" is not out";
 	              	}
 		}
 	}
@@ -195,7 +182,7 @@ app.post('/led/out/\*', function(req, res){
 		return res.render('index2', LEDs_dict);
 	});});
 
-app.post('/led/in/\*', function(req, res){
+app.post('/led/_in/\*', function(req, res){
         tmp = req.url.substr(8, 2);
         Gpio.readValue(GPIO_dict['value'+tmp], function(data) {
                 if (LOGGING) console.log('Read '+data.substr(0, 1) +' from pin '+ GPIO_dict['value'+tmp]);
@@ -203,6 +190,10 @@ app.post('/led/in/\*', function(req, res){
                 if (LOGGING) console.log(req.ip);
                 return res.render('index2', LEDs_dict);
 	});});
+
+app.post('/led/in/\*', function(req, res){
+	update_in_pins(function (LED_dict) {return res.render('index2', LED_dict);});
+});
 
 app.post('/led/export/\*', function(req, res){
         direction = req.url.substr(12, 3);
