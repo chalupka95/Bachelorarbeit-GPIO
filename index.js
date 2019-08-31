@@ -31,37 +31,6 @@ hinweise:''
 }
 
 
-/*
-const GPIO_dict = {
-value1:3,  //GPIO_2
-value2:5, //GPIO_3
-value3:7, //GPIO_4
-value4:29,//GPIO_5
-value5:31,//GPIO_6
-value6:26,//GPIO_7
-value7:24,//GPIO_8
-value8:21,//GPIO_9
-value9:19,//GPIO_10
-value10:23,//GPIO_11
-value11:32,//GPIO_12
-value12:33,//GPIO_13
-value13:8, //GPIO_14
-value14:10,//GPIO_15
-value15:36,//GPIO_16
-value16:11,//GPIO_17
-value17:12,//GPIO_18
-value18:35,//GPIO_19
-value19:38,//GPIO_20
-value20:40,//GPIO_21
-value21:15,//GPIO_22
-value22:16,//GPIO_23
-value23:18,//GPIO_24
-value24:22,//GPIO_25
-value25:37,//GPIO_26
-value26:13,//GPIO_27
-}
-*/
-
 const GPIO_dict = {
 value1:27,	//13	//1 doesnt exist
 value2:2,	//3
