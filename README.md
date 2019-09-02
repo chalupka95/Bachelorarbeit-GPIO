@@ -14,7 +14,7 @@ My bachelor thesis about GPIO on Rasberry Pi
 
 3. Run code inside project-directory using.
 - `node index.js`
-- `node index2.js`
+
 
 4. Open browser
 http://ip-raspberrypi:port/
