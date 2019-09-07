@@ -1,0 +1,108 @@
+<meta name="viewport" content="width=500, initial-scale=1"> <!--This line of code is for mobile responsive -->
+
+<head>
+<title>GPIO Bachelorarbeit</title>
+<link rel="stylesheet" type="text/css" href="/style2.css"/>
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"/>
+<script language="javascript" type="text/javascript" src="/script2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#button_test").click(function(){
+    $.get("/api/", function(data, status){
+      alert("Data: " + data + "\nStatus: " + status);
+    });
+  });
+});
+
+
+</script>
+</head>
+
+
+<body>
+        <image id="laterne" src = '/images/Laterne.png' onclick="check_pin()" alt="Laterne" style="float: left;position:absolute; bottom:0">
+        <image id="schalter" src = '/images/Schalter.png' onclick="change()" alt="Schalter" style="width:150px;position:absolute;left:330px;top:450px;"/>
+
+
+	<div class="dropdown_border">
+	 <div class="dropdown">
+	  <button onclick="toggle_selection1()" class="dropbtn">Schalter</button>
+	  <div id="myDropdown1" class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+            <a href="#">Link 4</a>
+            <a href="#">Link 5</a>
+            <a href="#">Link 6</a>
+            <a href="#">Link 7</a>
+            <a href="#">Link 8</a>
+            <a href="#">Link 9</a>
+            <a href="#">Link 10</a>
+            <a href="#">Link 11</a>
+            <a href="#">Link 12</a>
+            <a href="#">Link 13</a>
+            <a href="#">Link 14</a>
+            <a href="#">Link 15</a>
+            <a href="#">Link 16</a>
+            <a href="#">Link 17</a>
+            <a href="#">Link 18</a>
+            <a href="#">Link 19</a>
+            <a href="#">Link 20</a>
+            <a href="#">Link 21</a>
+            <a href="#">Link 22</a>
+            <a href="#">Link 23</a>
+            <a href="#">Link 24</a>
+            <a href="#">Link 25</a>
+            <a href="#">Link 26</a>
+	  </div>
+         <div class="dropdown">
+          <button onclick="toggle_selection2()" class="dropbtn">Laterne</button>
+          <div id="myDropdown2" class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+            <a href="#">Link 4</a>
+            <a href="#">Link 5</a>
+            <a href="#">Link 6</a>
+            <a href="#">Link 7</a>
+            <a href="#">Link 8</a>
+            <a href="#">Link 9</a>
+            <a href="#">Link 10</a>
+            <a href="#">Link 11</a>
+            <a href="#">Link 12</a>
+            <a href="#">Link 13</a>
+            <a href="#">Link 14</a>
+            <a href="#">Link 15</a>
+            <a href="#">Link 16</a>
+            <a href="#">Link 17</a>
+            <a href="#">Link 18</a>
+            <a href="#">Link 19</a>
+            <a href="#">Link 20</a>
+            <a href="#">Link 21</a>
+            <a href="#">Link 22</a>
+            <a href="#">Link 23</a>
+            <a href="#">Link 24</a>
+            <a href="#">Link 25</a>
+            <a href="#">Link 26</a>
+          </div>
+	</div>
+
+
+	<div style="position:absolute;left:630px;top:450px;"></div>
+
+	<div>
+        <form action="/api" style="position:absolute;left:700px;top:500px;"/>
+        <input type="text" name="pin" value="1"><br>
+        <input type="text" name="direction" value="out"><br>
+        <input type="submit" value="Submit">
+	</form>
+        <button id=button_test>teseeeeeeeeeeeeeeeeeeeeeeeeet</button>
+	</div>
+</body>
+
+
+
+<a href="/api">
+<image id="schalter"......
+</a>
