@@ -1,12 +1,101 @@
 <meta name="viewport" content="width=500, initial-scale=1"> <!--This line of code is for mobile responsive -->
 
 <head>
-<title>GPIO Bachelorarbeit</title>
-<Link rel="stylesheet" type="text/css" href="/style2.css"/>
-<Link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"/>
-<script language="javascript" type="text/javascript" src="/script2.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<title>GPIO Bachelorarbeit</title>
+	<Link rel="stylesheet" type="text/css" href="/style2.css"/>
+	<Link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"/>
+	<script language="javascript" type="text/javascript" src="/script2.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+	</script>
+</head>
+<body>
+	<div>
+		<h3 id='text_laterne'  style="position:absolute;left:95px;top:100px;"  >Laterne GPIO</h3>
+		<image id="laterne" src = '/images/Laterne.png' onclick="update_laterne()" alt="Laterne" style="float: left;position:absolute;bottom:0">
+        </div>
+
+	<div>
+		<h3 id='text_schalter' style="position:absolute;left:325px;top:350px;">Schalter GPIO</h3>
+		<image id="schalter" src = '/images/Schalter.png' onclick="change_schalter()" alt="Schalter" style="width:150px;position:absolute;left:330px;top:450px;"/>
+	</div>
+
+
+	<div class="dropdown_border">
+		<div class="dropdown">
+			<button onclick="toggle_selection1()" class="dropbtn">Laterne</button>
+			<div id="myDropdown1" class="dropdown-content">
+				<button id='pin1' type="button" onclick="set_Laterne(this)"">GPIO 1</button> 
+				<button id='pin2' type="button" onclick="set_Laterne(this)"">GPIO 2</button>
+				<button id='pin3' type="button" onclick="set_Laterne(this)"">GPIO 3</button>
+				<button id='pin4' type="button" onclick="set_Laterne(this)"">GPIO 4</button>
+				<button id='pin5' type="button" onclick="set_Laterne(this)"">GPIO 5</button>
+				<button id='pin6' type="button" onclick="set_Laterne(this)"">GPIO 6</button>
+				<button id='pin7' type="button" onclick="set_Laterne(this)"">GPIO 7</button>
+				<button id='pin8' type="button" onclick="set_Laterne(this)"">GPIO 8</button>
+				<button id='pin9' type="button" onclick="set_Laterne(this)"">GPIO 9</button>
+				<button id='pin10' type="button" onclick="set_Laterne(this)"">GPIO 10</button>
+				<button id='pin11' type="button" onclick="set_Laterne(this)"">GPIO 11</button>
+				<button id='pin12' type="button" onclick="set_Laterne(this)"">GPIO 12</button>
+				<button id='pin13' type="button" onclick="set_Laterne(this)"">GPIO 13</button>
+				<button id='pin14' type="button" onclick="set_Laterne(this)"">GPIO 14</button>
+				<button id='pin15' type="button" onclick="set_Laterne(this)"">GPIO 15</button>
+				<button id='pin16' type="button" onclick="set_Laterne(this)"">GPIO 16</button>
+				<button id='pin17' type="button" onclick="set_Laterne(this)"">GPIO 17</button>
+				<button id='pin18' type="button" onclick="set_Laterne(this)"">GPIO 18</button>
+				<button id='pin19' type="button" onclick="set_Laterne(this)"">GPIO 19</button>
+				<button id='pin20' type="button" onclick="set_Laterne(this)"">GPIO 20</button>
+				<button id='pin21' type="button" onclick="set_Laterne(this)"">GPIO 21</button>
+				<button id='pin22' type="button" onclick="set_Laterne(this)"">GPIO 22</button>
+				<button id='pin23' type="button" onclick="set_Laterne(this)"">GPIO 23</button>
+				<button id='pin24' type="button" onclick="set_Laterne(this)"">GPIO 24</button>
+				<button id='pin25' type="button" onclick="set_Laterne(this)"">GPIO 25</button>
+				<button id='pin26' type="button" onclick="set_Laterne(this)"">GPIO 26</button>
+			</div>
+		</div>
+		<div class="dropdown">
+			<button onclick="toggle_selection2()" class="dropbtn">Schalter</button>
+			<div id="myDropdown2" class="dropdown-content">
+				<button id='pin1' type="button" onclick="set_Schalter(this)"">GPIO 1</button>
+				<button id='pin2' type="button" onclick="set_Schalter(this)"">GPIO 2</button>
+				<button id='pin3' type="button" onclick="set_Schalter(this)"">GPIO 3</button>
+				<button id='pin4' type="button" onclick="set_Schalter(this)"">GPIO 4</button>
+				<button id='pin5' type="button" onclick="set_Schalter(this)"">GPIO 5</button>
+				<button id='pin6' type="button" onclick="set_Schalter(this)"">GPIO 6</button>
+				<button id='pin7' type="button" onclick="set_Schalter(this)"">GPIO 7</button>
+				<button id='pin8' type="button" onclick="set_Schalter(this)"">GPIO 8</button>
+				<button id='pin9' type="button" onclick="set_Schalter(this)"">GPIO 9</button>
+				<button id='pin10' type="button" onclick="set_Schalter(this)"">GPIO 10</button>
+				<button id='pin11' type="button" onclick="set_Schalter(this)"">GPIO 11</button>
+				<button id='pin12' type="button" onclick="set_Schalter(this)"">GPIO 12</button>
+				<button id='pin13' type="button" onclick="set_Schalter(this)"">GPIO 13</button>
+				<button id='pin14' type="button" onclick="set_Schalter(this)"">GPIO 14</button>
+				<button id='pin15' type="button" onclick="set_Schalter(this)"">GPIO 15</button>
+				<button id='pin16' type="button" onclick="set_Schalter(this)"">GPIO 16</button>
+				<button id='pin17' type="button" onclick="set_Schalter(this)"">GPIO 17</button>
+				<button id='pin18' type="button" onclick="set_Schalter(this)"">GPIO 18</button>
+				<button id='pin19' type="button" onclick="set_Schalter(this)"">GPIO 19</button>
+				<button id='pin20' type="button" onclick="set_Schalter(this)"">GPIO 20</button>
+				<button id='pin21' type="button" onclick="set_Schalter(this)"">GPIO 21</button>
+				<button id='pin22' type="button" onclick="set_Schalter(this)"">GPIO 22</button>
+				<button id='pin23' type="button" onclick="set_Schalter(this)"">GPIO 23</button>
+				<button id='pin24' type="button" onclick="set_Schalter(this)"">GPIO 24</button>
+				<button id='pin25' type="button" onclick="set_Schalter(this)"">GPIO 25</button>
+				<button id='pin26' type="button" onclick="set_Schalter(this)"">GPIO 26</button>
+			</div>
+		</div>
+	</div>
+
+	<div style="position:absolute; bottom:0; right:0">
+		<image src = '/images/nodejs-logo.png' alt="LOGO" style="width:180px;height:180px;  float: right;">
+		<image src = '/images/rpi-logo.png' alt="LOGO" style="width:140px;height:180px;  float: right;">
+		<image src = '/images/github.png' alt="LOGO" style="width:200px;height:200px;  float: right;">
+	</div>
+
+
+</body>
 <script>
+/*
 $(document).ready(function(){
   $("#button_test").click(function(){
     $.get("/api/", function(data, status){
@@ -16,93 +105,16 @@ $(document).ready(function(){
 });
 
 
-</script>
-</head>
 
 
-<body>
-        <image id="laterne" src = '/images/Laterne.png' onclick="check_pin()" alt="Laterne" style="float: left;position:absolute; bottom:0">
-        <image id="schalter" src = '/images/Schalter.png' onclick="change()" alt="Schalter" style="width:150px;position:absolute;left:330px;top:450px;"/>
-
-
-	<div class="dropdown_border">
-	 <div class="dropdown">
-	  <button onclick="toggle_selection1()" class="dropbtn">Schalter</button>
-	  <div id="myDropdown1" class="dropdown-content">
-            <a href="#" class="a_dropdown">GPIO 1</a>
-            <a href="#" class="a_dropdown">GPIO 2</a>
-            <a href="#" class="a_dropdown">GPIO 3</a>
-            <a href="#" class="a_dropdown">GPIO 4</a>
-            <a href="#" class="a_dropdown">GPIO 5</a>
-            <a href="#" class="a_dropdown">GPIO 6</a>
-            <a href="#" class="a_dropdown">GPIO 7</a>
-            <a href="#" class="a_dropdown">GPIO 8</a>
-            <a href="#" class="a_dropdown">GPIO 9</a>
-            <a href="#" class="a_dropdown">GPIO 10</a>
-            <a href="#" class="a_dropdown">GPIO 11</a>
-            <a href="#" class="a_dropdown">GPIO 12</a>
-            <a href="#" class="a_dropdown">GPIO 13</a>
-            <a href="#" class="a_dropdown">GPIO 14</a>
-            <a href="#" class="a_dropdown">GPIO 15</a>
-            <a href="#" class="a_dropdown">GPIO 16</a>
-            <a href="#" class="a_dropdown">GPIO 17</a>
-            <a href="#" class="a_dropdown">GPIO 18</a>
-            <a href="#" class="a_dropdown">GPIO 19</a>
-            <a href="#" class="a_dropdown">GPIO 20</a>
-            <a href="#" class="a_dropdown">GPIO 21</a>
-            <a href="#" class="a_dropdown">GPIO 22</a>
-            <a href="#" class="a_dropdown">GPIO 23</a>
-            <a href="#" class="a_dropdown">GPIO 24</a>
-            <a href="#" class="a_dropdown">GPIO 25</a>
-            <a href="#" class="a_dropdown">GPIO 26</a>
-	  </div>
-         <div class="dropdown">
-          <button onclick="toggle_selection2()" class="dropbtn">Laterne</button>
-          <div id="myDropdown2" class="dropdown-content">
-            <a href="#" class="a_dropdown">GPIO 1</a>
-            <a href="#" class="a_dropdown">GPIO 2</a>
-            <a href="#" class="a_dropdown">GPIO 3</a>
-            <a href="#" class="a_dropdown">GPIO 4</a>
-            <a href="#" class="a_dropdown">GPIO 5</a>
-            <a href="#" class="a_dropdown">GPIO 6</a>
-            <a href="#" class="a_dropdown">GPIO 7</a>
-            <a href="#" class="a_dropdown">GPIO 8</a>
-            <a href="#" class="a_dropdown">GPIO 9</a>
-            <a href="#" class="a_dropdown">GPIO 10</a>
-            <a href="#" class="a_dropdown">GPIO 11</a>
-            <a href="#" class="a_dropdown">GPIO 12</a>
-            <a href="#" class="a_dropdown">GPIO 13</a>
-            <a href="#" class="a_dropdown">GPIO 14</a>
-            <a href="#" class="a_dropdown">GPIO 15</a>
-            <a href="#" class="a_dropdown">GPIO 16</a>
-            <a href="#" class="a_dropdown">GPIO 17</a>
-            <a href="#" class="a_dropdown">GPIO 18</a>
-            <a href="#" class="a_dropdown">GPIO 19</a>
-            <a href="#" class="a_dropdown">GPIO 20</a>
-            <a href="#" class="a_dropdown">GPIO 21</a>
-            <a href="#" class="a_dropdown">GPIO 22</a>
-            <a href="#" class="a_dropdown">GPIO 23</a>
-            <a href="#" class="a_dropdown">GPIO 24</a>
-            <a href="#" class="a_dropdown">GPIO 25</a>
-            <a href="#" class="a_dropdown">GPIO 26</a>
-          </div>
-	</div>
-
-
-	<div style="position:absolute;left:630px;top:450px;"></div>
-
-	<div>
+        <div>
         <form action="/api" style="position:absolute;left:700px;top:500px;"/>
         <input type="text" name="pin" value="1"><br>
         <input type="text" name="direction" value="out"><br>
         <input type="submit" value="Submit">
-	</form>
+        </form>
         <button id=button_test>teseeeeeeeeeeeeeeeeeeeeeeeeet</button>
-	</div>
-</body>
+        </div>
 
-
-
-<a href="/api">
-<image id="schalter"......
-</a>
+*/
+</script>

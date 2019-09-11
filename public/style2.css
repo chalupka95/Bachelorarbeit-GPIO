@@ -4,11 +4,10 @@ body {
    background-size: cover;
    background-position: center;
    height:100%
-   /*zoom:100%;*/
 }
 
-dropdown_border {
-  margin: 10px
+.dropdown_border {
+  margin: 5px;
   position:absolute;
   right:10px;
   top:10px;
@@ -19,7 +18,7 @@ dropdown_border {
 .dropbtn {
   background-color: #A4A4A4;
   color: white;
-  padding: 16px;
+  padding: 13px;
   font-size: 16px;
   cursor: pointer;
   width: 160px;
@@ -36,8 +35,7 @@ dropdown_border {
 .dropdown {
   position: relative;
   display: inline-block;
-  margin-left:auto; 
-  margin-right:0}
+}
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
@@ -52,13 +50,27 @@ dropdown_border {
 /* Links inside the dropdown */
 .dropdown-content a {
   color: black;
-  padding: 12px 16px;
+  padding: 6px 6px;
   text-decoration: none;
   display: block;
 }
-
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #ddd}
+
+
+
+/* Links inside the dropdown */
+.dropdown-content button {
+  color: black;
+  padding: 2px 8px;
+  text-decoration: none;
+  display: block;
+  min-width: 160px;
+}
+/* Change color of dropdown links on hover */
+.dropdown-content button:hover {background-color: #ddd}
+
+
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;} 
