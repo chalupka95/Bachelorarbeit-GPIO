@@ -2,7 +2,7 @@ var laterne = 'not set';
 var schalter= 'not set';
 
 function update_laterne() {
-	let pin_id =document.getElementById("text_laterne").innerHTML.substr(13,2)
+	let pin_id =document.getElementById("text_laterne").innerHTML.substr(13,2).trim()
         $.get("/api?Pin="+pin_id, function(data, status){
 		if ((JSON.stringify(data['direction']['pin'+pin_id])) == JSON.stringify("in")) {
 			if ((JSON.stringify(data['value']['pin'+pin_id])) == 1) {
@@ -19,11 +19,10 @@ function update_laterne() {
 
 
 function change_schalter() {
-	let pin_id =document.getElementById("text_schalter").innerHTML.substr(13,2)
+	let pin_id =document.getElementById("text_schalter").innerHTML.substr(13,2).trim()
 	$.get("/api?Pin="+pin_id, function(data, status){
-		alert(JSON.stringify(data['direction']['pin'+pin_id]));
-                if ((JSON.stringify(data['direction']['pin'+pin_id])) == JSON.stringify("out")) {
-		        if ((JSON.stringify(data['value']['pin'+pin_id])) == 0) {
+		if ((JSON.stringify(data['direction']['pin'+pin_id])) == JSON.stringify("out")) {
+			if ((JSON.stringify(data['value']['pin'+pin_id])) == JSON.stringify("0")) {
 				$.ajax({
                         	contentType: 'application/json',
                         	type: 'POST',
@@ -31,14 +30,27 @@ function change_schalter() {
                         	dataType: 'json',
                         	data: JSON.stringify({"value": {[`pin${pin_id}`]:'1'}}),
                         	success: function(datax) {
-					document.getElementById('schalter').src='/images/Schalter1.png';
-                                	document.getElementById("text_schalter").innerHTML='Schalter GPIO '+pin.id.substr(3,2);},
+					document.getElementById('schalter').src='/images/Schalter2.png';
+                                	document.getElementById("text_schalter").innerHTML='Schalter GPIO '+pin_id;},
                         	error: function(){
 					alert("Schalter konnte nicht auf 1 gesetzt werden");},
                         	processData: false,
                 		});
-			}
-                        if ((JSON.stringify(data['value']['pin'+pin_id])) == 1) {
+			}else if ((JSON.stringify(data['value']['pin'+pin_id])) == JSON.stringify('not set')) {
+                                $.ajax({
+                                contentType: 'application/json',
+                                type: 'POST',
+                                url: '/api',
+                                dataType: 'json',
+                                data: JSON.stringify({"value": {[`pin${pin_id}`]:'1'}}),
+                                success: function(datax) {
+                                        document.getElementById('schalter').src='/images/Schalter2.png';
+                                        document.getElementById("text_schalter").innerHTML='Schalter GPIO '+pin_id;},
+                                error: function(){
+                                        alert("Schalter konnte nicht auf 1 gesetzt werden");},
+                                processData: false,
+                                });
+                        }else if ((JSON.stringify(data['value']['pin'+pin_id])) == JSON.stringify("1")) {
 				$.ajax({
                                 contentType: 'application/json',
                                 type: 'POST',
@@ -46,16 +58,16 @@ function change_schalter() {
                                 dataType: 'json',
                                 data: JSON.stringify({"value": {[`pin${pin_id}`]:'0'}}),
                                 success: function(datax) {
-                                        document.getElementById('schalter').src='/images/Schalter2.png';
-                                        document.getElementById("text_schalter").innerHTML='Schalter GPIO '+pin.id.substr(3,2);},
+                                        document.getElementById('schalter').src='/images/Schalter.png';
+                                        document.getElementById("text_schalter").innerHTML='Schalter GPIO '+pin_id;;},
                                 error: function(){
 					alert("Schalter konnte nicht auf 0 gesetzt werden");},
                                 processData: false,
 				});
-			}
+			}else {alert(JSON.stringify(data))}
                 } else {
                         alert('ERROR:   Pin is not direction out');
-                        document.getElementById('schalter').src='/images/Schalter2.png'};
+                        document.getElementById('schalter').src='/images/Schalter.png'};
         });
 }
 
@@ -97,8 +109,9 @@ function set_Schalter(pin) {
                         error: function(){alert("Schalter konnte nicht auf "+pin.id+"gesetzt werden");},
                         processData: false,
                 });
-		document.getElementById("schalter").innerHTML='Schalter GPIO '+pin.id.substr(3,2)
-		schalter=pin.id}}
+		document.getElementById('schalter').src='/images/Schalter.png'
+	}
+}
 
 
 /*######################################################################################*/

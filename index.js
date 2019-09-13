@@ -1,3 +1,4 @@
+
 var express 	= require('express');
 var Gpio 	= require('./GPIO.js');
 var path 	= require('path');
@@ -140,11 +141,16 @@ app.get('/api*', function(req, res){
 		newDict["value"]={}
 		for (i in req.query.Pin) {
 			if (req.query.Pin[i] < 27) {
-				Gpio.readValue(GPIO_dict['value'+req.query.Pin[i]], function(data) {
-                                        LEDs_dict['value']['pin'+req.query.Pin[i]]= Number(data.substr(0, 1));
+				if (LEDs_dict['direction']['pin'+req.query.Pin[i]]=='in'){
+					Gpio.readValue(GPIO_dict['value'+req.query.Pin[i]], function(data) {
+                                        	LEDs_dict['value']['pin'+req.query.Pin[i]]= Number(data.substr(0, 1));
+						Object.assign(newDict["direction"], {[`pin${req.query.Pin[i]}`]:LEDs_dict['direction']['pin'+req.query.Pin[i]]});
+						Object.assign(newDict["value"], {[`pin${req.query.Pin[i]}`]:LEDs_dict['value']['pin'+req.query.Pin[i]]});
+					});
+				}else{
 					Object.assign(newDict["direction"], {[`pin${req.query.Pin[i]}`]:LEDs_dict['direction']['pin'+req.query.Pin[i]]});
-					Object.assign(newDict["value"], {[`pin${req.query.Pin[i]}`]:LEDs_dict['value']['pin'+req.query.Pin[i]]});
-				});
+                                        Object.assign(newDict["value"], {[`pin${req.query.Pin[i]}`]:LEDs_dict['value']['pin'+req.query.Pin[i]]});
+				}
 			} else {
 				newDict["Hinweis"]	={zähler:"Es gibt kein GPIO "+req.query.Pin[i]};
 				zähler=zähler+1
@@ -168,6 +174,9 @@ app.post('/api', function(req, res) {
         let directions=      req.body['direction'];
         let values=          req.body['value'];
         LEDs_dict['hinweise']=''
+	console.log(req.body)
+	console.log(directions)
+	console.log(values)
         for (let direction in directions) {
                 if ((directions[direction] == LEDs_dict['direction'][direction])) {
                         console.log('Nothing to do...direction up to date');

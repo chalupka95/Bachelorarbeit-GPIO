@@ -2,7 +2,8 @@
 
 <head>
 	<title>GPIO Bachelorarbeit</title>
-	<Link rel="stylesheet" type="text/css" href="/style2.css"/>
+	<!--<Link rel="stylesheet" type="text/css" href="/style.css"/>-->
+        <Link rel="stylesheet" type="text/css" href="/style2.css"/>
 	<Link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"/>
 	<script language="javascript" type="text/javascript" src="/script2.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -11,13 +12,13 @@
 </head>
 <body>
 	<div>
-		<h3 id='text_laterne'  style="position:absolute;left:95px;top:100px;"  >Laterne GPIO</h3>
-		<image id="laterne" src = '/images/Laterne.png' onclick="update_laterne()" alt="Laterne" style="float: left;position:absolute;bottom:0">
+		<h3 id='text_laterne'  style="position:absolute;left:595px;top:100px;"  >Laterne GPIO</h3>
+		<image id="laterne" src = '/images/Laterne.png' onclick="update_laterne()" alt="Laterne" style="float:left;position:absolute;bottom:0;left:500">
         </div>
 
 	<div>
-		<h3 id='text_schalter' style="position:absolute;left:325px;top:350px;">Schalter GPIO</h3>
-		<image id="schalter" src = '/images/Schalter.png' onclick="change_schalter()" alt="Schalter" style="width:150px;position:absolute;left:330px;top:450px;"/>
+		<h3 id='text_schalter' style="position:absolute;left:825px;top:350px;">Schalter GPIO</h3>
+		<image id="schalter" src = '/images/Schalter.png' onclick="change_schalter()" alt="Schalter" style="width:150px;position:absolute;left:830px;top:450px;"/>
 	</div>
 
 
@@ -85,6 +86,29 @@
 			</div>
 		</div>
 	</div>
+
+
+	<div style="position:absolute;left:0px;bottom:0px;">
+                <div id='Anwendung' class="BorderMargin" style="float:left; display:initial">
+                        <image id='Zurück_image' src="/images/Zurück.png" alt="Zurück" style="width:120px;height:120px;">
+                        <form action="/" method="get"/>
+                                <button type="submit" class="button">Zurück</button>
+                        </form>
+                        <p id='Anwendung_text' class="status_text">Zurück zum Monitoring</p>
+                </div>
+
+		<div id='Unexport' class="BorderMargin" style="float:left; display:initial">
+			<image id='Fragezeichen_image' src="/images/Fragezeichen.png" alt="Fragezeichen" style="width:120px;height:120px;">
+			<form action="/api" method="post"/>
+				<button type="submit" class="button">Klick</button>
+			</form>
+			<p id='Unexport_text' class="status_text">Klick to go to API</p>
+		</div>
+	</div>
+
+
+
+
 
 	<div style="position:absolute; bottom:0; right:0">
 		<image src = '/images/nodejs-logo.png' alt="LOGO" style="width:180px;height:180px;  float: right;">
