@@ -1,3 +1,7 @@
+// Author Stefan Chalupka
+// Matr. Nr 6037666
+// Thema: Entwicklung eines NodeJS basierten IOT Development-Kit für Raspberry Pi mit Anwenungsbeispiel
+
 //Nötige Variablen werden initialisert
 var Reload = false;
 var DIRECTION_list = [];
