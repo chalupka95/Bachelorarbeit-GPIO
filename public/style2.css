@@ -5,23 +5,10 @@ body {
    background-position: center;
    height:100%}
 
-
-
-
-
-
-
-
-
-
-
-
 p.status_text {
    text-align: center;
    font-weight: bold;
 }
-
-
 .BorderMargin {
    float: left;
    margin: 2px;
@@ -32,7 +19,6 @@ p.status_text {
    border-radius: 6px;
    display:none; //visibility:hidden
 }
-
 button {
     background-color: grey;
     border: 1px;
@@ -48,16 +34,15 @@ button {
     height:50px;
     width:120px;
 }
+.button2 {height:25px;}
 
-
+/*###############################################___*_DROPDOWN_*___##########################################*/
 .dropdown_border {
   margin: 5px;
   position:absolute;
   right:10px;
   top:10px;
 }
-
-
  /* Dropdown Button */
 .dropbtn {
   background-color: #A4A4A4;
@@ -102,3 +87,24 @@ button {
 .dropdown-content button:hover {background-color: #ddd}
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;} 
+
+
+
+
+/*#########################################___*_WECKER_*___#######################################################*/
+/*CSS Für den Wecker*/
+/* Quelle: javascriptkit.com script script2 alarm.shtml*/
+#jsalarmclock{
+font-family: Tahoma;
+font-weight: bold;
+font-size: 12px;}
+#jsalarmclock div{
+margin-bottom: 0.8em;}
+#jsalarmclock div.leftcolumn{
+float: left;
+width: 150px;
+font-size: 13px;
+background-color: lightyellow;
+clear: left;}
+#jsalarmclock span{
+margin-right: 5px;}

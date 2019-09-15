@@ -3,7 +3,6 @@ body {
    background-repeat: no-repeat;
    background-size: cover;
    background-position: center;
-   zoom:100%;
 }
 button {
     background-color: #e7e7e7; /* Grey */
@@ -34,7 +33,7 @@ button {
    margin: 2px;
    padding: 3px;
    width: 127px;
-   height: 280px;
+   height: 300px;
    border: 2px solid black;
    border-radius: 6px;
 }
@@ -70,46 +69,8 @@ p.status_text {
 div.start_led {
   float: left;
   width: 70px;
-  height: 110px;
+  height: 118px;
   padding: 10px;
   border: 1px solid black;
 }
-
-
-
-###############################################
-
-
-
-.container{
-  height: 300px;
-  width: 300px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -150px 0 0 -150px;
-}
-
-.square{
-  height: 94%;
-  width: 94%;
-  background: white;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -47% 0 0 -47%;
-}
-
-.black{ 
-  background: black;  
-  animation: rotate 10s infinite linear; 
-}
-
-@keyframes rotate{
-  0%{ transform: rotate(0deg); }
-    100%{ transform: rotate(360deg); }  
-}
-
-
-
 
