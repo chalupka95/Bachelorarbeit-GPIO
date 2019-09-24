@@ -22,8 +22,8 @@ function update_laterne() {
 
 //Funktion um die Funktion update_laterne() repetitiv alle 3 Sekunden aufzurufen
 function repeat_update_laterne() {
-	update_laterne()
-	setTimeout(repeat_update_laterne(), 3000);}
+	update_laterne();
+	setTimeout(repeat_update_laterne, 500);}
 
 
 //Funktion um eine GET Request an die API zu schicken um zu erfahren welchen Wert der gewählte PIN hat
@@ -103,7 +103,6 @@ function set_Laterne(pin) {
 		});
 		document.getElementById('laterne').src='/images/Laterne.png'
 	}
-	repeat_update_laterne()
 }
 
 //Setzt den Schlater auf einen Wert i zwischen 1 und 26 und schickt eine JSON POST Request an die API

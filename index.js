@@ -22,7 +22,7 @@ var LEDs_dict = {
 "pin1":"not set","pin2":"not set","pin3":"not set","pin4":"not set","pin5":"not set","pin6":"not set","pin7":"not set","pin8":"not set",
 "pin9":"not set","pin10":"not set","pin11":"not set","pin12":"not set","pin13":"not set","pin14":"not set","pin15":"not set","pin16":"not set",
 "pin17":"not set","pin18":"not set","pin19":"not set","pin20":"not set","pin21":"not set","pin22":"not set","pin23":"not set","pin24":"not set",
-"pin25":"not set","pin26":"not set"},"hinweise":{}}
+"pin25":"not set","pin26":"not set"},"hinweise":{}};
 
 const GPIO_dict = {
 value1:27,	//13	//1 doesnt exist
@@ -63,36 +63,57 @@ app.use(express.json());
 
 //>>> Berechnet JSON-Response für Get-Requests an /api
 //>>> Optional: /api?Pin=<int>
-app.get('/api*', function(req, res){
+app.get('/api*', function(req, res) {
 	console.log('API Get Anfrage von IP:'+req.ip)
 	var newDict = {};
 	LEDs_dict['hinweise']=''
 	let zähler = 1
 	if ('Pin' in req.query) {
-		newDict["direction"]={}
-		newDict["value"]={}
-		console.log(req.query)
-		console.log(req.query.Pin)
-		for (i in req.query.Pin) {
-			if (req.query.Pin[i] < 27) {
-				if (LEDs_dict['direction']['pin'+req.query.Pin[i]]=='in'){
-					Gpio.readValue(GPIO_dict['value'+req.query.Pin[i]], function(data) {
-                                        	LEDs_dict['value']['pin'+req.query.Pin[i]]= Number(data.substr(0, 1));
+		newDict["direction"]={};
+		newDict["value"]={};
+		newDict["Hinweis"]={};
+		if (typeof(req.query.Pin)=='object') {
+			for (i in req.query.Pin) {
+				if ((req.query.Pin[i] < 27) && (req.query.Pin[i] > 0)){
+					if (LEDs_dict['direction']['pin'+req.query.Pin[i]]=='in'){
+						Gpio.readValue(GPIO_dict['value'+req.query.Pin[i]], function(data) {
+                                        		LEDs_dict['value']['pin'+req.query.Pin[i]]= Number(data.substr(0, 1));
+							Object.assign(newDict["direction"], {[`pin${req.query.Pin[i]}`]:LEDs_dict['direction']['pin'+req.query.Pin[i]]});
+							Object.assign(newDict["value"], {[`pin${req.query.Pin[i]}`]:LEDs_dict['value']['pin'+req.query.Pin[i]]});
+						});
+					}else{
 						Object.assign(newDict["direction"], {[`pin${req.query.Pin[i]}`]:LEDs_dict['direction']['pin'+req.query.Pin[i]]});
-						Object.assign(newDict["value"], {[`pin${req.query.Pin[i]}`]:LEDs_dict['value']['pin'+req.query.Pin[i]]});
-					});
-				}else{
-					Object.assign(newDict["direction"], {[`pin${req.query.Pin[i]}`]:LEDs_dict['direction']['pin'+req.query.Pin[i]]});
-                                        Object.assign(newDict["value"], {[`pin${req.query.Pin[i]}`]:LEDs_dict['value']['pin'+req.query.Pin[i]]});
+                                        	Object.assign(newDict["value"], {[`pin${req.query.Pin[i]}`]:LEDs_dict['value']['pin'+req.query.Pin[i]]});
+					}
+				} else {
+					if (zähler==1) Object.assign(newDict["Hinweis"],{"Status0":"Es sind nur Werte zwischen 1 und 26 erlaubt"});
+					Object.assign(newDict["Hinweis"],{[`Status${zähler}`]:"Es gibt kein GPIO "+req.query.Pin[i]});
+					zähler=zähler+1
 				}
-			} else {
-				newDict["Hinweis"]	={[`Status${zähler}`]:"Es gibt kein GPIO "+req.query.Pin[i]};
+			};
+			setTimeout(function() {res.json(newDict)}, 100)
+		} else { //if typeof(req.query.Pin)=='string'
+			if ((req.query.Pin < 27) && (req.query.Pin > 0)){
+                        	if (LEDs_dict['direction']['pin'+req.query.Pin]=='in'){
+                                	Gpio.readValue(GPIO_dict['value'+req.query.Pin], function(data) {
+                                        	LEDs_dict['value']['pin'+req.query.Pin]= Number(data.substr(0, 1));
+                                                Object.assign(newDict["direction"], {[`pin${req.query.Pin}`]:LEDs_dict['direction']['pin'+req.query.Pin]});
+                                                Object.assign(newDict["value"], {[`pin${req.query.Pin}`]:LEDs_dict['value']['pin'+req.query.Pin]});
+                                        });
+                                }else{
+                                        Object.assign(newDict["direction"], {[`pin${req.query.Pin}`]:LEDs_dict['direction']['pin'+req.query.Pin]});
+                                        Object.assign(newDict["value"], {[`pin${req.query.Pin}`]:LEDs_dict['value']['pin'+req.query.Pin]});
+                                };
+                        } else {
+                         	Object.assign(newDict["Hinweis"],{"Status0":"Es sind nur Werte zwischen 1 und 26 erlaubt"});
+                         	Object.assign(newDict["Hinweis"],{[`Status${zähler}`]:"Es gibt kein GPIO "+req.query.Pin});
 				zähler=zähler+1
-			}
-		};
-		setTimeout(function() {res.json(newDict)}, 100)
+                	};
+			setTimeout(function() {res.json(newDict)}, 100);
+		}
 	} else {
-        	LEDs_dict['hinweise']='Eingabe ungültig (/api?Pin=1&Pin=2)'
+		Object.assign(LEDs_dict["Hinweis"],{[`Status${zähler}`]:'Eingabe ungültig (/api?Pin=1&Pin=2)'});
+                zähler=zähler+1
         	for (let pin in LEDs_dict['direction']) {
                 	if (LEDs_dict['direction'][pin]=='in') {
                         	Gpio.readValue(GPIO_dict['value'+pin.substr(3,2)], function(data) {
@@ -110,49 +131,75 @@ app.post('/api', function(req, res) {
         console.log('API Post Anfrage von IP:'+req.ip)
         let directions=      req.body['direction'];
         let values=          req.body['value'];
-        LEDs_dict['hinweise']=''
-	console.log(req.body)
-	console.log(directions)
-	console.log(values)
+	let zähler=1;
+        LEDs_dict['Hinweis']={}
         for (let direction in directions) {
-		console.log(direction);
-                if ((directions[direction] == LEDs_dict['direction'][direction])) {
-                        console.log('Nothing to do...direction up to date');
-                } else {
-                        if (directions[direction] != 'not set') {
-                                LEDs_dict['direction'][direction]=directions[direction];
-                                LEDs_dict['value'][direction]='not set';
-                                Gpio.setDirection(GPIO_dict['value'+direction.substr(3,2)], directions[direction], function() {
-                                        console.log('Pin'+direction.substr(3,2)+' direction is '+directions[direction]);
-                                });
-                        }else{
-                                Gpio.close(direction.substr(3,2), function() {
-                                        console.log('Pin'+direction.substr(3,2)+' unexported');
-                                        LEDs_dict['direction'][direction]='not set';
-                                        LEDs_dict['value'][direction] = 'not set'
-                                })
-                        }
-                }
+		if ((directions[direction] =='in') || (directions[direction] == 'out') || (directions[direction] == 'not set')) {
+			if ((direction.substr(3,2) < 27) || (direction.substr(3,2) > 0)) {
+                		if ((directions[direction] == LEDs_dict['direction'][direction])) {
+                	        	console.log('Nothing to do...direction up to date');
+                		} else {
+                	        	if (directions[direction] != 'not set') {
+                	        	        LEDs_dict['direction'][direction]=directions[direction];
+                	        	        LEDs_dict['value'][direction]='not set';
+                	        	        Gpio.setDirection(GPIO_dict['value'+direction.substr(3,2)], directions[direction], function() {
+                	        	                console.log('Pin'+direction.substr(3,2)+' direction is '+directions[direction]);
+                	        	        });
+                	        	}else{
+                	        	        Gpio.close(direction.substr(3,2), function() {
+                	        	                console.log('Pin'+direction.substr(3,2)+' unexported');
+                	        	                LEDs_dict['direction'][direction]='not set';
+                	        	                LEDs_dict['value'][direction] = 'not set';
+                	        	        })
+                	        	}
+                		}
+			} else {
+				if (zähler == 1) Object.assign(LEDs_dict["Hinweis"],{"Status0":"Es sind nur Value: 0/1 und Direction: 'in'/'out' für Pins zwischen 1 und 26 erlaubt"});
+                        	Object.assign(LEDs_dict["Hinweis"],{[`Status${zähler}`]:"Es gibt kein GPIO "+direction.substr(3,2)});
+                        	zähler=zähler+1;
+			}
+		} else {
+			if (zähler == 1) Object.assign(LEDs_dict["Hinweis"],{"Status0":"Es sind nur Value: 0/1 und Direction: 'in'/'out' für Pins zwischen 1 und 26 erlaubt"});
+			Object.assign(LEDs_dict["Hinweis"],{[`Status${zähler}`]:"Es gibt keine direction "+directions[direction]})
+			zähler=zähler+1
+		}
         }
         for (let value in values) {
                 let before=LEDs_dict['value'][value]
-                if ((values[value] == LEDs_dict['value'][value])) {
-                        console.log('Nothing to do...value up to date');
+                if ((values[value] ==1) || (values[value] == 0) || (values[value] == 'not set')) {
+                        if ((value.substr(3,2) < 27) || (value.substr(3,2) > 0)) {
+                		if ((values[value] == LEDs_dict['value'][value])) {
+                        		console.log('Nothing to do...value up to date');
+                		} else {
+                        		if (LEDs_dict['direction'][value] == 'out') {
+                                		LEDs_dict['value'][value]=values[value];
+                                		Gpio.writeValue(GPIO_dict['value'+value.substr(3,2)], values[value], function(err) {
+                                        		if (err) {
+                                                		throw err
+                                                		LEDs_dict['value'][value]=before
+								if (zähler == 1) Object.assign(LEDs_dict["Hinweis"],{"Status0":"Es sind nur Value: 0/1 und Direction: 'in'/'out' für Pins zwischen 1 und 26 erlaubt"});
+                                                		Object.assign(LEDs_dict["Hinweis"],{[`Status${zähler}`]:err})
+                                                		zähler=zähler+1
+							}
+                                		})
+                        		}else{
+						if (zähler == 1) Object.assign(LEDs_dict["Hinweis"],{"Status0":"Es sind nur Value: 0/1 und Direction: 'in'/'out' für Pins zwischen 1 und 26 erlaubt"});
+                                		Object.assign(LEDs_dict["Hinweis"],{[`Status${zähler}`]:'The direction of Pin '+value.substr(3,2)+" is not out"})
+                                		zähler=zähler+1
+                        		}
+                		}
+                        } else {
+                                if (zähler == 1) Object.assign(LEDs_dict["Hinweis"],{"Status0":"Es sind nur Value: 0/1 und Direction: 'in'/'out' für Pins zwischen 1 und 26 erlaubt"});
+                                Object.assign(LEDs_dict["Hinweis"],{[`Status${zähler}`]:"Es gibt kein GPIO "+value.substr(3,2)})
+                                zähler=zähler+1
+			}
                 } else {
-                        if (LEDs_dict['direction'][value] == 'out') {
-                                LEDs_dict['value'][value]=values[value];
-                                Gpio.writeValue(GPIO_dict['value'+value.substr(3,2)], values[value], function(err) {
-                                        if (err) {
-                                                throw err
-                                                LEDs_dict['hinweise']+=LEDs_dict['hinweise']+err+'\n'
-                                                LEDs_dict['value'][value]=before}
-                                })
-                        }else{
-                                LEDs_dict['hinweise']+=LEDs_dict['hinweise']+'The direction of Pin '+value.substr(3,2)+" is not out";
-                        }
-                }
-        }
-        res.json(LEDs_dict)
+                        if (zähler == 1) Object.assign(LEDs_dict["Hinweis"],{"Status0":"Es sind nur Value: 0/1 und Direction: 'in'/'out' für Pins zwischen 1 und 26 erlaubt"});
+                        Object.assign(LEDs_dict["Hinweis"],{[`Status${zähler}`]:"Es gibt keine value "+values[value]})
+                        zähler=zähler+1
+		}
+	}
+        res.json(LEDs_dict);
 });
 
 //#################################___*_MONITORING-WEBSITE_*___###########################################
