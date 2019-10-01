@@ -11,7 +11,7 @@ var path 	= require('path');
 var app 	= express();
 const LOGGING 	=true;
 
-//>>>Dieses Dictionary im JSON-Format ist die Datenstrucktur für die Software 
+//>>>Dieses Dictionary im JSON-Format ist die Datenstrucktur für die Software
 //>>>und der Kommunikation Zwischen Server und Clients
 var LEDs_dict = {
 "direction":{
@@ -64,7 +64,7 @@ app.use(express.json());
 //>>> Berechnet JSON-Response für Get-Requests an /api
 //>>> Optional: /api?Pin=<int>
 app.get('/api*', function(req, res) {
-	console.log('API Get Anfrage von IP:'+req.ip)
+	if (LOGGING) console.log('API Get:'+req.ip)
 	var newDict = {};
 	LEDs_dict['hinweise']=''
 	let zähler = 1
@@ -128,7 +128,7 @@ app.get('/api*', function(req, res) {
 //>>> Berechnet JSON-Response und reagiert auf JSON-POST-Requests
 //>>> Setzt directions und values der GPIO-Pins
 app.post('/api', function(req, res) {
-        console.log('API Post Anfrage von IP:'+req.ip)
+        if (LOGGING) console.log('API Post:'+req.ip)
         let directions=      req.body['direction'];
         let values=          req.body['value'];
 	let zähler=1;
@@ -137,17 +137,17 @@ app.post('/api', function(req, res) {
 		if ((directions[direction] =='in') || (directions[direction] == 'out') || (directions[direction] == 'not set')) {
 			if ((direction.substr(3,2) < 27) || (direction.substr(3,2) > 0)) {
                 		if ((directions[direction] == LEDs_dict['direction'][direction])) {
-                	        	console.log('Nothing to do...direction up to date');
+                	        	if (LOGGING) console.log('API: '+'Nothing to do...direction up to date');
                 		} else {
                 	        	if (directions[direction] != 'not set') {
                 	        	        LEDs_dict['direction'][direction]=directions[direction];
                 	        	        LEDs_dict['value'][direction]='not set';
                 	        	        Gpio.setDirection(GPIO_dict['value'+direction.substr(3,2)], directions[direction], function() {
-                	        	                console.log('Pin'+direction.substr(3,2)+' direction is '+directions[direction]);
+                	        	                if (LOGGING) console.log('API: '+'Pin'+direction.substr(3,2)+' direction is '+directions[direction]);
                 	        	        });
                 	        	}else{
                 	        	        Gpio.close(direction.substr(3,2), function() {
-                	        	                console.log('Pin'+direction.substr(3,2)+' unexported');
+                	        	                if (LOGGING) console.log('API: '+'Pin'+direction.substr(3,2)+' unexported');
                 	        	                LEDs_dict['direction'][direction]='not set';
                 	        	                LEDs_dict['value'][direction] = 'not set';
                 	        	        })
@@ -169,7 +169,7 @@ app.post('/api', function(req, res) {
                 if ((values[value] ==1) || (values[value] == 0) || (values[value] == 'not set')) {
                         if ((value.substr(3,2) < 27) || (value.substr(3,2) > 0)) {
                 		if ((values[value] == LEDs_dict['value'][value])) {
-                        		console.log('Nothing to do...value up to date');
+                        		if (LOGGING) console.log('API: '+'Nothing to do...value up to date');
                 		} else {
                         		if (LEDs_dict['direction'][value] == 'out') {
                                 		LEDs_dict['value'][value]=values[value];
@@ -208,6 +208,11 @@ app.post('/api', function(req, res) {
 app.get('/Anwendungsbeispiel/\*', function(req, res){
         res.render('Anwendung', LEDs_dict);});
 
+//sendet die Seite 'Anwendung'
+app.get('/Anwendungsbeispiel2/\*', function(req, res){
+        res.render('Anwendung2', LEDs_dict);});
+
+
 //sendet die Seite 'index' für all mögliche URLs (gut wegen vertippen)
 app.get('/\*', function(req, res){
  	res.render('index', LEDs_dict);});
@@ -216,24 +221,24 @@ app.get('/\*', function(req, res){
 //Funktion für die Pins die auf der Seite 'index' (Monitoring) auf direction out gesetzt sind.
 // >>> schaltet die jeweiligen Pins aus/ein  und updatet das Dictionary
 app.post('/led/out/\*', function(req, res){
+	if (LOGGING) console.log('Webseite_LED_OUT: '+req.ip);
 	tmp = req.url.substr(9, 2);
 	if (LEDs_dict['value']['pin'+tmp] == 'not set') LEDs_dict['value']['pin'+tmp]=0;
 	LEDs_dict['value']['pin'+tmp] = 1 - LEDs_dict['value']['pin'+tmp];
 	Gpio.writeValue(GPIO_dict['value'+tmp], LEDs_dict['value']['pin'+tmp], function(err) {
         	if (err) throw err;
-        	if (LOGGING) console.log('Written '+LEDs_dict['value']['pin'+tmp]+' to pin '+ GPIO_dict['value'+tmp]);
-		if (LOGGING) console.log(req.ip);
+        	if (LOGGING) console.log('Webseite: '+'Written '+LEDs_dict['value']['pin'+tmp]+' to pin '+ GPIO_dict['value'+tmp]);
 		return res.render('index', LEDs_dict);
 	});});
 
 //Funktion für die Pins die auf der Seite 'index' (Monitoring) auf direction in gesetzt sind.
 // >>> ließt die aktuellen Werte der Pins im System und updatet die jeweiligen Pins im Dictionary
 app.post('/led/in/\*', function(req, res){
+	if (LOGGING) console.log('Webseite_LED_IN: '+req.ip);
         tmp = req.url.substr(8, 2);
         Gpio.readValue(GPIO_dict['value'+tmp], function(data) {
-                if (LOGGING) console.log('Read '+data.substr(0, 1) +' from pin '+ GPIO_dict['value'+tmp]);
+                if (LOGGING) console.log('Webseite: '+'Read '+data.substr(0, 1) +' from pin '+ GPIO_dict['value'+tmp]);
 		LEDs_dict['value']['pin'+tmp]= Number(data.substr(0, 1));
-                if (LOGGING) console.log(req.ip);
                 return res.render('index', LEDs_dict);
 	});});
 
@@ -241,16 +246,18 @@ app.post('/led/in/\*', function(req, res){
 // >>> schaltet die jeweiligen Pins nach dem export auf ihre Funktion (Lesend/Schreibend)*
 app.post('/led/export/\*', function(req, res){
         direction = req.url.substr(12, 3);
+	if (LOGGING) console.log('Webseite_EXPORT: '+req.ip);
 	list = req.body
 	list.forEach(function(led) {
 		Gpio.setDirection(GPIO_dict['value'+led.substr(3,2)], direction, function() {LEDs_dict['direction']['pin'+led.substr(3,2)]=direction});
-		LEDs_dict['value']['pin'+led.substr(3,2)]='not set'	});
+		LEDs_dict['value']['pin'+led.substr(3,2)]='not set'});
 	return res.render('index', LEDs_dict);});
 
 
 //Funktion um alle Pins auf der Seite 'index' (Monitoring) zurücksetzen zu können (Unexport).
 // >>> schaltet die jeweiligen Pins komplett aus.
 app.post('/unexport/\*', function(req, res){
+	if (LOGGING) console.log('Webseite_UNEXPORT_ALL: '+req.ip);
 	LEDs_dict = {
 	"direction":{
 		"pin1":"not set","pin2":"not set","pin3":"not set","pin4":"not set",

@@ -5,7 +5,7 @@ var schalter= 'not set';
 //Funktion um mithilfe der gesetzten GPIO Nummer den Wert des Pins bei der API abzurufen
 //Mit dem JSON-Response wird entschieden welche Farbe die Laterne haben soll Rot/Grün/Weiß
 function update_laterne() {
-	let pin_id =document.getElementById("text_laterne").innerHTML.substr(13,2).trim()
+	let pin_id =document.getElementById("text_laterne").innerHTML.substr(18,2).trim()
         $.get("/api?Pin="+pin_id, function(data, status){					//api/?Pin=1
 		if ((JSON.stringify(data['direction']['pin'+pin_id])) == JSON.stringify("in")) {
 			if ((JSON.stringify(data['value']['pin'+pin_id])) == 1) {
@@ -15,7 +15,7 @@ function update_laterne() {
 			if ((JSON.stringify(data['value']['pin'+pin_id])) == JSON.stringify('not set')) {
 				document.getElementById('laterne').src='/images/Laterne.png'};	//Weiß
 		} else {
-			alert('ERROR:	Pin is not direction in');
+			alert('ERROR:	Pin is not direction in'+'\n'+'Tipp:	'+'Set Street light first!');
 			document.getElementById('laterne').src='/images/Laterne.png'};		//Weiß
 	});
 }
@@ -23,14 +23,14 @@ function update_laterne() {
 //Funktion um die Funktion update_laterne() repetitiv alle 3 Sekunden aufzurufen
 function repeat_update_laterne() {
 	update_laterne();
-	setTimeout(repeat_update_laterne, 500);}
+	if (schalter != 'not set') setTimeout(repeat_update_laterne, 500);}
 
 
 //Funktion um eine GET Request an die API zu schicken um zu erfahren welchen Wert der gewählte PIN hat
 //Mit diesem Wert, kann dann über eine POST Request der Wert auf sein inverses gesetzt werden.
 // >>> EIN/AUS Schalter				('not set'==0) != 1
 function change_schalter() {
-	let pin_id =document.getElementById("text_schalter").innerHTML.substr(13,2).trim()
+	let pin_id =document.getElementById("text_schalter").innerHTML.substr(16,2).trim();
 	$.get("/api?Pin="+pin_id, function(data, status){
 		if ((JSON.stringify(data['direction']['pin'+pin_id])) == JSON.stringify("out")) {
 			if ((JSON.stringify(data['value']['pin'+pin_id])) == JSON.stringify("0")) {
@@ -42,9 +42,9 @@ function change_schalter() {
                         	data: JSON.stringify({"value": {[`pin${pin_id}`]:'1'}}),
                         	success: function(datax) {
 					document.getElementById('schalter').src='/images/Schalter2.png';
-                                	document.getElementById("text_schalter").innerHTML='Schalter GPIO '+pin_id;},
+                                	document.getElementById("text_schalter").innerHTML='Controller GPIO '+pin_id;},
                         	error: function(){
-					alert("Schalter konnte nicht auf 1 gesetzt werden");},
+					alert("couldn't set controller to 1");},
                         	processData: false,
                 		});
 			}else if ((JSON.stringify(data['value']['pin'+pin_id])) == JSON.stringify('not set')) {
@@ -56,9 +56,9 @@ function change_schalter() {
                                 data: JSON.stringify({"value": {[`pin${pin_id}`]:'1'}}),
                                 success: function(datax) {
                                         document.getElementById('schalter').src='/images/Schalter2.png';
-                                        document.getElementById("text_schalter").innerHTML='Schalter GPIO '+pin_id;},
+                                        document.getElementById("text_schalter").innerHTML='Controller GPIO '+pin_id;},
                                 error: function(){
-                                        alert("Schalter konnte nicht auf 1 gesetzt werden");},
+                                        alert("couldn't set controller to 1");},
                                 processData: false,
                                 });
                         }else if ((JSON.stringify(data['value']['pin'+pin_id])) == JSON.stringify("1")) {
@@ -70,14 +70,14 @@ function change_schalter() {
                                 data: JSON.stringify({"value": {[`pin${pin_id}`]:'0'}}),
                                 success: function(datax) {
                                         document.getElementById('schalter').src='/images/Schalter.png';
-                                        document.getElementById("text_schalter").innerHTML='Schalter GPIO '+pin_id;;},
+                                        document.getElementById("text_schalter").innerHTML='Controller GPIO '+pin_id;;},
                                 error: function(){
-					alert("Schalter konnte nicht auf 0 gesetzt werden");},
+					alert("couldn't set controller to 0");},
                                 processData: false,
 				});
 			}else {alert(JSON.stringify(data))}
                 } else {
-                        alert('ERROR:   Pin is not direction out');
+                        alert('ERROR:   Pin is not direction out'+'\n'+'Tipp:    '+'Set Controller first!');
                         document.getElementById('schalter').src='/images/Schalter.png'};
         });
 }
@@ -87,7 +87,7 @@ function change_schalter() {
 //um die Pin_i auf direction 'in' zu setzen
 function set_Laterne(pin) {
 	if (schalter == pin.id) {
-		alert('You can not take the same GPIO like Schalter')
+		alert('You can not take the same GPIO like Controller')
 	} else {
 		$.ajax({
 			contentType: 'application/json',
@@ -96,9 +96,9 @@ function set_Laterne(pin) {
 			dataType: 'json',
     			data: JSON.stringify({"direction": {[`${pin.id}`]:'in'}}),
 			success: function(data) {
-				document.getElementById("text_laterne").innerHTML='Laterne GPIO '+pin.id.substr(3,2);
+				document.getElementById("text_laterne").innerHTML='Street light GPIO '+pin.id.substr(3,2);
                         	laterne=pin.id;},
-			error: function(){alert("Laterne konnte nicht auf "+pin.id+" gesetzt werden");},
+			error: function(){alert("couldn't set Street light to "+pin.id);},
     			processData: false,
 		});
 		document.getElementById('laterne').src='/images/Laterne.png'
@@ -109,7 +109,7 @@ function set_Laterne(pin) {
 //um die Pin_i auf direction 'out' zu setzen
 function set_Schalter(pin) {
 	if (laterne == pin.id) {
-		alert('You can not take the same GPIO like Laterne')
+		alert('You can not take the same GPIO like Street light')
 	} else {
 		$.ajax({
                         contentType: 'application/json',
@@ -118,9 +118,9 @@ function set_Schalter(pin) {
                         dataType: 'json',
                         data: JSON.stringify({"direction": {[`${pin.id}`]:'out'}}),
                         success: function(data) {
-                                document.getElementById("text_schalter").innerHTML='Schalter GPIO '+pin.id.substr(3,2);
+                                document.getElementById("text_schalter").innerHTML='Controller GPIO '+pin.id.substr(3,2);
                                 schalter=pin.id;},
-                        error: function(){alert("Schalter konnte nicht auf "+pin.id+"gesetzt werden");},
+                        error: function(){alert("couldn't set Controller to "+pin.id);},
                         processData: false,
                 });
 		document.getElementById('schalter').src='/images/Schalter.png'
@@ -152,84 +152,5 @@ window.onclick = function(event) {
       }
     }
   }
-}
-
-/*######################################################################################*/
-/*######################################################################################*/
-
-/* Klasse für Wecker */
-/* Quelle: javascriptkit.com script script2 alarm.shtml */
-var jsalarm={
-	padfield:function(f){
-		return (f<10)? "0"+f : f
-	},
-	showcurrenttime:function(){
-		var dateobj=new Date()
-		var ct=this.padfield(dateobj.getHours())+":"+this.padfield(dateobj.getMinutes())+":"+this.padfield(dateobj.getSeconds())
-		this.ctref.innerHTML=ct
-		this.ctref.setAttribute("title", ct)
-		if (typeof this.hourwake!="undefined"){ //if alarm is set
-			if (this.ctref.title==(this.hourwake+":"+this.minutewake+":"+this.secondwake)){
-				//Hier kommt das hin was beim ALARM ausgeführt werden soll
-
-                                //clearInterval(jsalarm.timer)
-                                //window.location=document.getElementById("musicloc").value
-                                //change_schalter()
-				$.ajax({
-                                	contentType: 'application/json',
-                                	type: 'POST',
-                                	url: '/api',
-                                	dataType: 'json',
-                                	data: document.getElementById("musicloc").value,
-                                	success: function(data) {
-                                	        alert(JSON.stringify(data));},
-                                	error: function(){
-                                	        alert("Da ging was schief");},
-                                	processData: false,
-                                	});
-			}
-		}
-	},
-	init:function(){
-		var dateobj=new Date()
-		this.ctref=document.getElementById("jsalarm_ct")
-		this.submitref=document.getElementById("submitbutton")
-		this.submitref.onclick=function(){
-			jsalarm.setalarm()
-			this.value="Alarm Set"
-			this.disabled=true
-			return false
-		}
-		this.resetref=document.getElementById("resetbutton")
-		this.resetref.onclick=function(){
-			jsalarm.submitref.disabled=false
-			jsalarm.hourwake=undefined
-			jsalarm.hourselect.disabled=false
-			jsalarm.minuteselect.disabled=false
-			jsalarm.secondselect.disabled=false
-			return false
-		}
-		var selections=document.getElementsByTagName("select")
-		this.hourselect=selections[0]
-		this.minuteselect=selections[1]
-		this.secondselect=selections[2]
-		for (var i=0; i<60; i++){
-			if (i<24) //If still within range of hours field: 0-23
-			this.hourselect[i]=new Option(this.padfield(i), this.padfield(i), false, dateobj.getHours()==i)
-			this.minuteselect[i]=new Option(this.padfield(i), this.padfield(i), false, dateobj.getMinutes()==i)
-			this.secondselect[i]=new Option(this.padfield(i), this.padfield(i), false, dateobj.getSeconds()==i)
-
-		}
-		jsalarm.showcurrenttime()
-		jsalarm.timer=setInterval(function(){jsalarm.showcurrenttime()}, 1000)
-	},
-	setalarm:function(){
-		this.hourwake=this.hourselect.options[this.hourselect.selectedIndex].value
-		this.minutewake=this.minuteselect.options[this.minuteselect.selectedIndex].value
-		this.secondwake=this.secondselect.options[this.secondselect.selectedIndex].value
-		this.hourselect.disabled=true
-		this.minuteselect.disabled=true
-		this.secondselect.disabled=true
-	}
 }
 

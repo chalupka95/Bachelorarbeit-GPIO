@@ -12,7 +12,7 @@
 <body>
 <div style='display:flex'>
 <div class="BorderMargin">
-  <div style=text-align:center;>Mark the Led and then set the direction you want to use</div>
+  <div style=text-align:center;>mark the LED and then set the direction you want to use</div>
 	<div id="led1" class='start_led' onclick="change(this)">
 		<img src="/images/LED4.png"" width="65" height="65"><p style="text-align:center;">1</p></div>
 	<div id="led2" class='start_led' onclick="change(this)">
@@ -69,18 +69,18 @@
 </div>
 
 <div class="BorderMargin">
-        <button id="MC1" class='MCbutton' style='background-color: orange;' onclick="make_direction('out')">Click to set the marked pins to Direction 'Out'</button>
-        <button id="MC2" class='MCbutton' style='background-color: green;' onclick="make_direction('in')">Click to set the marked pins to Direction 'In'</button>
+        <button id="MC1" class='MCbutton' style='background-color: orange;' onclick="make_direction('out')">click to set the marked pins to direction 'out'</button>
+        <button id="MC2" class='MCbutton' style='background-color: green;' onclick="make_direction('in')">click to set the marked pins to direction 'in'</button>
 </div>
 
 <div class="BorderMargin">
-	<img src="/images/raspberry_layout.png" alt="Raspberry GPIO Layout" width="280" height="300"></div>
+	<img src="/images/raspberry_layout.png" onclick="window.open(this.src)" alt="Raspberry GPIO Layout" width="280" height="300"></div>
 </div>
 
 </div><br>
 
 <div class="BorderMargin">
-  <div style=text-align:center;> Aktive exportierte LED with direction out </div>
+  <div style=text-align:center;> active and exported LED with direction out </div>
  
   <div id='border1led1' class="BorderMargin_LED">
     <image id='image1LED1' class='imageLED' src="/images/LED3.png" alt="LED" style="width:120px;height:120px;">
@@ -351,7 +351,7 @@
 
 
 <div class="BorderMargin">
-  <div style=text-align:center;> Aktive exportierte LED with direction in </div>
+  <div style=text-align:center;> active and exported LED with direction in </div>
 
   <div id='border2led1' class="BorderMargin_LED">
     <image id="image2LED1" src='/images/LED3.png' alt="LED" style="width:120px;height:120px;">
@@ -633,31 +633,38 @@
 
 
 
-<div style="left:0px;bottom:0px">
-	<div id='Unexport' class="BorderMargin_LED" style="float:left; display:initial">
+<div>
+	<div id='Unexport' class="BorderMargin_LED" style="float:left; display:initial; bottom:0px;">
 		<image id='Unexport_image' class='imageLED' src="/images/Kreuz.png" alt="Kreuz" style="width:120px;height:120px;">
 		<form action="/unexport/" method="post"/>
-			<button type="submit" class="button button5">Klick</button>
+			<button type="submit" class="button button5">click</button>
 		</form>
-		<p id='Unexport_text' class="status_text">Klick to unexport all Pins</p>
+		<p id='Unexport_text' class="status_text">click to unexport all pins</p>
 	</div>
-<!--
+
 	<div id='Anwendung' class="BorderMargin_LED" style="float:left; display:initial">
 		<image id='Anwendung_image' class='imageLED' src="/images/Weiter.png" alt="Weiter" style="width:120px;height:120px;">
 		<form action="/Anwendungsbeispiel/" method="get"/>
-			<button type="submit" class="button button5">Weiter</button>
+			<button type="submit" class="button button5">click</button>
 		</form>
-	<p id='Anwendung_text' class="status_text">Weiter zur Anwendung</p>
--->
+		<p id='Anwendung_text' class="status_text">continue to Anwendung 1</p>
+	</div>
 
+        <div id='Anwendung2' class="BorderMargin_LED" style="float:left; display:initial">
+                <image id='Anwendung_image' class='imageLED' src="/images/Weiter.png" alt="Weiter" style="width:120px;height:120px;">
+
+                <form action="/Anwendungsbeispiel2/" method="get"/>
+                        <button type="submit" class="button button5">continue</button>
+                </form>
+		<p id='Anwendung_text' class="status_text">continue to Anwendung 2</p>
+	</div>
 </div>
 
 <div style="position:fixed; bottom:0px; right:0px;">
         <image src = '/images/nodejs-logo3.png' alt="LOGO" style="height:180px;  float: right;">
         <image src = '/images/rpi-logo.png' alt="LOGO" style="width:140px;height:180px;  float: right;">
         <image src = '/images/github.png' alt="LOGO" style="width:200px;height:200px;  float: right;">
+	<div style="text-align:right;">Author: Stefan Chalupka</div>
 </div>
 
 </body>
-
-
