@@ -1,0 +1,55 @@
+body {
+   background-image: url("/images/background.jpg");
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center;
+   height:100%}
+
+p.status_text {
+   text-align: center;
+   font-weight: bold;
+}
+.BorderMargin {
+   float: left;
+   margin: 2px;
+   padding: 3px;
+   width: 127px;
+   height: 280px;
+   border: 2px solid black;
+   border-radius: 6px;
+   display:none; //visibility:hidden
+}
+
+button {
+    background-color: white;
+    border: 1px;
+    color: black;
+    font-weight: bold;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px;
+    cursor: pointer;
+    height:50px;
+    width:120px;
+}
+
+/*CSS Für den Wecker*/
+/* Quelle: javascriptkit.com script script2 alarm.shtml*/
+
+#jsalarmclock{
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 12px;}
+#jsalarmclock div{
+	margin-bottom: 0.8em;}
+#jsalarmclock div.leftcolumn{
+	float: left;
+	width: 150px;
+	font-size: 13px;
+	background-color: lightyellow;
+	clear: left;}
+#jsalarmclock span{
+	margin-right: 5px;}

@@ -1,0 +1,77 @@
+<meta name="viewport" content="width=500, initial-scale=1"> <!--This line of code is for mobile responsive -->
+<head>
+        <title>GPIO Bachelorarbeit</title>
+        <!--<Link rel="stylesheet" type="text/css" href="/style.css"/>-->
+        <Link rel="stylesheet" type="text/css" href="/style3.css"/>
+        <Link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"/>
+        <script language="javascript" type="text/javascript" src="/script3.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script></script>
+</head>
+<body>
+	<div style="position:absolute;top: 40%;left: 30%;">
+	<form action="" method="">
+		<div id="jsalarmclock">
+			<div>
+				<div class="leftcolumn">current time:</div>
+				<span id="jsalarm_ct" style="letter-spacing: 2px"></span>
+			</div>
+			<div>
+				<div class="leftcolumn">set alarm:</div> 
+				<span><select></select> hrs</span> 
+				<span><select></select> min</span> 
+				<span><select></select> sec</span>
+			</div>
+			<div>
+				<div class="leftcolumn">set POST-Data:</div> 
+				<input type="text" id="musicloc" size="55" value='{"direction":{"pin1":"out"},"value":{"pin1":"1"}}' /> 
+				<span style="font: normal 11px Tahoma"> *</span>
+
+			</div>
+			<input type="submit" value="set alarm !" id="submitbutton" /> 
+			<input type="reset"  value="reset"	 id="resetbutton" />
+                        <span style="font: normal 11px Tahoma">    *Style as an example</span>
+
+		</div>
+	</form>
+	</div>
+	<script type="text/javascript">
+		jsalarm.init()
+	</script>
+
+
+
+
+        <div style="position:fixed;left:0px;bottom:0px;">
+                <div id='Zurück' class="BorderMargin" style="float:left; display:initial">
+                        <image id='Zurück_image' src="/images/Zurück.png" alt="Zurück" style="width:120px;height:120px;">
+                        <form action="/" method="get"/>
+                                <button type="submit" class="button">back</button>
+                        </form>
+                        <p id='Anwendung_text' class="status_text">back to Monitoring</p>
+                </div>
+
+                <div id='Anwendung' class="BorderMargin" style="float:left; display:initial">
+                        <image id='Anwendung_image' class='imageLED' src="/images/Weiter.png" alt="Weiter" style="width:120px;height:120px;">
+                        <form action="/Anwendungsbeispiel/" method="get"/>
+                                <button type="submit" class="button">continue</button>
+                        </form>
+                        <p id='Anwendung_text' class="status_text">continue to Anwendung 1</p>
+                </div>
+
+                <div id='API' class="BorderMargin" style="float:left; display:initial">
+                        <image id='Fragezeichen_image' src="/images/Fragezeichen.png" alt="Fragezeichen" style="width:120px;height:120px;">
+                        <form action="/api" method="post"/>
+                                <button type="submit" class="button">click</button>
+                        </form>
+                        <p id='Unexport_text' class="status_text">click to show JSON-API</p>
+                </div>
+        </div>
+        <div style="position:fixed; bottom:0; right:0">
+                <image src = '/images/nodejs-logo3.png' alt="LOGO" style="height:180px;  float:right;">
+                <image src = '/images/rpi-logo.png' alt="LOGO" style="width:140px;height:180px;  float:right;">
+                <image src = '/images/github.png' alt="LOGO" style="width:200px;height:200px;  float:right;">
+		<div style="text-align:right;">Author: Stefan Chalupka</div>
+        </div>
+
+</body>
