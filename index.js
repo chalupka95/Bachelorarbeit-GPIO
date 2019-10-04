@@ -10,6 +10,7 @@ var path 	= require('path');
 //var gpio 	= require('rpi-gpio');
 var app 	= express();
 const LOGGING 	=true;
+const PORT	=3000;
 
 //>>>Dieses Dictionary im JSON-Format ist die Datenstrucktur für die Software
 //>>>und der Kommunikation Zwischen Server und Clients
@@ -135,7 +136,7 @@ app.post('/api', function(req, res) {
         LEDs_dict['Hinweis']={}
         for (let direction in directions) {
 		if ((directions[direction] =='in') || (directions[direction] == 'out') || (directions[direction] == 'not set')) {
-			if ((direction.substr(3,2) < 27) || (direction.substr(3,2) > 0)) {
+			if ((direction.substr(3,2) < 27) && (direction.substr(3,2) > 0)) {
                 		if ((directions[direction] == LEDs_dict['direction'][direction])) {
                 	        	if (LOGGING) console.log('API: '+'Nothing to do...direction up to date');
                 		} else {
@@ -167,7 +168,7 @@ app.post('/api', function(req, res) {
         for (let value in values) {
                 let before=LEDs_dict['value'][value]
                 if ((values[value] ==1) || (values[value] == 0) || (values[value] == 'not set')) {
-                        if ((value.substr(3,2) < 27) || (value.substr(3,2) > 0)) {
+                        if ((value.substr(3,2) < 27) && (value.substr(3,2) > 0)) {
                 		if ((values[value] == LEDs_dict['value'][value])) {
                         		if (LOGGING) console.log('API: '+'Nothing to do...value up to date');
                 		} else {
@@ -281,5 +282,5 @@ app.post('/unexport/\*', function(req, res){
         return res.render('index', LEDs_dict);});
 
 //######################################___*_PORT und START_*___#################################################
-app.listen(3000, function () {
-  console.log('Simple LED Control Server Started on Port: 3000!')});
+app.listen(PORT, function () {
+  console.log('Simple LED Control Server Started on Port: '+PORT+'!')});
