@@ -112,8 +112,7 @@ app.get('/api*', function(req, res) {
 			setTimeout(function() {res.json(newDict)}, 100);
 		}
 	} else {
-		Object.assign(LEDs_dict["Hinweis"],{[`Status${zähler}`]:'Eingabe ungültig (/api?Pin=1&Pin=2)'});
-                zähler=zähler+1
+		Object.assign(LEDs_dict["Hinweis"],{"Status0":'Eingabe syntax (/api?Pin=1&Pin=2)'});
         	for (let pin in LEDs_dict['direction']) {
                 	if (LEDs_dict['direction'][pin]=='in') {
                         	Gpio.readValue(GPIO_dict['value'+pin.substr(3,2)], function(data) {
@@ -135,7 +134,7 @@ app.post('/api', function(req, res) {
         LEDs_dict['Hinweis']={}
         for (let direction in directions) {
 		if ((directions[direction] =='in') || (directions[direction] == 'out') || (directions[direction] == 'not set')) {
-			if ((direction.substr(3,2) < 27) || (direction.substr(3,2) > 0)) {
+			if ((direction.substr(3,2) < 27) && (direction.substr(3,2) > 0) && direction.substr(3,2) !="") {
                 		if ((directions[direction] == LEDs_dict['direction'][direction])) {
                 	        	if (LOGGING) console.log('API: '+'Nothing to do...direction up to date');
                 		} else {
@@ -155,7 +154,7 @@ app.post('/api', function(req, res) {
                 		}
 			} else {
 				if (zähler == 1) Object.assign(LEDs_dict["Hinweis"],{"Status0":"Es sind nur Value: 0/1 und Direction: 'in'/'out' für Pins zwischen 1 und 26 erlaubt"});
-                        	Object.assign(LEDs_dict["Hinweis"],{[`Status${zähler}`]:"Es gibt kein GPIO "+direction.substr(3,2)});
+                        	Object.assign(LEDs_dict["Hinweis"],{[`Status${zähler}`]:"Es gibt kein "+direction});
                         	zähler=zähler+1;
 			}
 		} else {
@@ -165,22 +164,24 @@ app.post('/api', function(req, res) {
 		}
         }
         for (let value in values) {
-                let before=LEDs_dict['value'][value]
-                if ((values[value] ==1) || (values[value] == 0) || (values[value] == 'not set')) {
-                        if ((value.substr(3,2) < 27) || (value.substr(3,2) > 0)) {
+                //let before=LEDs_dict['value'][value]
+                if (((values[value] ==1) || (values[value] ==0) || (values[value] == 'not set')) && !(values[value] ==="")) {
+                        if ((value.substr(3,2) < 27) && (value.substr(3,2) > 0) && value.substr(3,2) !="") {
                 		if ((values[value] == LEDs_dict['value'][value])) {
                         		if (LOGGING) console.log('API: '+'Nothing to do...value up to date');
                 		} else {
                         		if (LEDs_dict['direction'][value] == 'out') {
-                                		LEDs_dict['value'][value]=values[value];
+                                		//LEDs_dict['value'][value]=values[value];
                                 		Gpio.writeValue(GPIO_dict['value'+value.substr(3,2)], values[value], function(err) {
                                         		if (err) {
                                                 		throw err
-                                                		LEDs_dict['value'][value]=before
+                                                		//LEDs_dict['value'][value]=before
 								if (zähler == 1) Object.assign(LEDs_dict["Hinweis"],{"Status0":"Es sind nur Value: 0/1 und Direction: 'in'/'out' für Pins zwischen 1 und 26 erlaubt"});
                                                 		Object.assign(LEDs_dict["Hinweis"],{[`Status${zähler}`]:err})
                                                 		zähler=zähler+1
-							}
+							}else { if (LOGGING) console.log('API: '+'written '+values[value]+' to '+value);
+								LEDs_dict['value'][value]=values[value].toString();
+}
                                 		})
                         		}else{
 						if (zähler == 1) Object.assign(LEDs_dict["Hinweis"],{"Status0":"Es sind nur Value: 0/1 und Direction: 'in'/'out' für Pins zwischen 1 und 26 erlaubt"});
@@ -190,7 +191,7 @@ app.post('/api', function(req, res) {
                 		}
                         } else {
                                 if (zähler == 1) Object.assign(LEDs_dict["Hinweis"],{"Status0":"Es sind nur Value: 0/1 und Direction: 'in'/'out' für Pins zwischen 1 und 26 erlaubt"});
-                                Object.assign(LEDs_dict["Hinweis"],{[`Status${zähler}`]:"Es gibt kein GPIO "+value.substr(3,2)})
+                                Object.assign(LEDs_dict["Hinweis"],{[`Status${zähler}`]:"Es gibt kein "+value})
                                 zähler=zähler+1
 			}
                 } else {

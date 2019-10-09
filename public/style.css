@@ -6,7 +6,7 @@ body {
    height:100%
 }
 button {
-    background-color: #e7e7e7; /* Grey */
+    background-color: white; /* Grey */
     border: 1px;
     color: black;
     font-weight: bold;
@@ -20,7 +20,7 @@ button {
     height:50px;
     width:120px;
 }
-.button2 {background-color: #008CBA;} /* Blue */
+.button2 {background-color: grey; height:25px;}
 .button3 {background-color: #f44336;} /* Red */
 .button5 {background-color: white; color: black;}
 .button4 {background-color: grey;}/* Green */
@@ -56,6 +56,16 @@ p.status_text {
    display:inline-block;
 }
 
+.BorderMenu {
+   float: left;
+   margin: 2px;
+   padding: 3px;
+   width: 127px;
+   height: 280px;
+   border: 2px solid black;
+   border-radius: 6px;
+}
+
 .BorderMargin_LED {
    float: left;
    margin: 2px;
@@ -67,6 +77,12 @@ p.status_text {
    display:none; //visibility:hidden
 }
 
+.BorderMenuCollection {
+	position:fixed;
+	left:0px;
+	bottom:0px;
+}
+
 div.start_led {
   float: left;
   width: 70px;
@@ -75,3 +91,8 @@ div.start_led {
   border: 1px solid black;
 }
 
+
+.imageMENU {
+	width:120px;
+	height:120px;
+}

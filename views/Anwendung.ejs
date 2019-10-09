@@ -1,12 +1,11 @@
 <meta name="viewport" content="width=500, initial-scale=1"> <!--This line of code is for mobile responsive -->
 <head>
 	<title>GPIO Bachelorarbeit</title>
-	<!--<Link rel="stylesheet" type="text/css" href="/style.css"/>-->
+	<Link rel="stylesheet" type="text/css" href="/style.css"/>
         <Link rel="stylesheet" type="text/css" href="/style2.css"/>
 	<Link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"/>
 	<script language="javascript" type="text/javascript" src="/script2.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script></script>
 </head>
 <body>
 	<div style="float:left; position:absolute; bottom: 0;margin-left:580px; width:360px;">
@@ -85,23 +84,23 @@
 	</div>
 
 
-	<div style="position:fixed;left:0px;bottom:0px;">
-                <div id='Zurück' class="BorderMargin" style="float:left; display:initial">
-                        <image id='Zurück_image' src="/images/Zurück.png" alt="Zurück" style="width:120px;height:120px;">
+	<div class="BorderMenuCollection">
+                <div id='Zurück' class="BorderMenu">
+                        <image id='Zurück_image' class='imageMENU' src="/images/Zurück.png" alt="Zurück">
                         <form action="/" method="get"/>
                                 <button type="submit" class="button">back</button>
                         </form>
                         <p id='Anwendung_text' class="status_text">back to monitoring</p>
                 </div>
-	        <div id='Anwendung2' class="BorderMargin" style="float:left; display:initial">
-	                <image id='Anwendung_image' class='imageLED' src="/images/Weiter.png" alt="Weiter" style="width:120px;height:120px;">
+	        <div id='Anwendung2' class="BorderMenu">
+	                <image id='Anwendung_image' class='imageMENU' src="/images/Weiter.png" alt="Weiter">
 		        <form action="/Anwendungsbeispiel2/" method="get"/>
 		                <button type="submit" class="button">continue</button>
 		        </form>
 		        <p id='Anwendung_text' class="status_text">continue to Anwendung 2</p>
 		</div>
-		<div id='API' class="BorderMargin" style="float:left; display:initial">
-			<image id='Fragezeichen_image' src="/images/Fragezeichen.png" alt="Fragezeichen" style="width:120px;height:120px;">
+		<div id='API' class="BorderMenu">
+			<image id='Fragezeichen_image' class='imageMENU' src="/images/Fragezeichen.png" alt="Fragezeichen">
 			<form action="/api" method="post"/>
 				<button type="submit" class="button">click</button>
 			</form>
