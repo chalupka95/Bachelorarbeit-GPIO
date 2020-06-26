@@ -5,6 +5,7 @@ My bachelor thesis about GPIO on Rasberry Pi
 ### ---How to install---
 
 1. Install node.js on Raspberry pi.
+- sudo apt-get update
 - `sudo apt-get update`
 - `sudo apt-get install nodejs`
 - `sudo apt-get install build-essential`
